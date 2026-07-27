@@ -7,9 +7,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-display: var(--font-fraunces);
+  --font-heading: var(--font-fraunces);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -18,15 +19,19 @@
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
   --color-chart-3: var(--chart-3);
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
+  --color-status-good: var(--status-good);
+  --color-status-warning: var(--status-warning);
+  --color-status-serious: var(--status-serious);
+  --color-status-critical: var(--status-critical);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -48,73 +53,213 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ---------------------------------------------------------------
+   Trackyee palette
+   Cool indigo/violet base, single warm amber accent for data.
+   Glass surfaces sit on top of a soft mesh background.
+   --------------------------------------------------------------- */
+
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(0.975 0.008 285);
+  --foreground: oklch(0.24 0.03 280);
+
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.24 0.03 280);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --popover-foreground: oklch(0.24 0.03 280);
+
+  --primary: oklch(0.52 0.21 285);
+  --primary-foreground: oklch(0.99 0.005 285);
+
+  --secondary: oklch(0.95 0.014 285);
+  --secondary-foreground: oklch(0.32 0.06 285);
+
+  --muted: oklch(0.95 0.01 285);
+  --muted-foreground: oklch(0.52 0.03 283);
+
+  --accent: oklch(0.74 0.15 68);
+  --accent-foreground: oklch(0.24 0.05 60);
+
+  --destructive: oklch(0.58 0.22 25);
+  --success: oklch(0.62 0.15 158);
+  --warning: oklch(0.76 0.15 78);
+
+  --border: oklch(0.89 0.012 285);
+  --input: oklch(0.89 0.012 285);
+  --ring: oklch(0.52 0.21 285);
+
+  /* Data hues are validated separately from the UI chrome: the brand violet,
+     cyan and magenta all collapse toward blue under deutan/protan, so they
+     can't carry series identity. These three clear every gate all-pairs in
+     both modes (validate_palette.js). Cap categorical series at 3.
+     Aqua sits at 2.82:1 on a white card — direct labels or the table view
+     are required relief wherever it's used. */
+  --chart-1: #2a78d6;
+  --chart-2: #eb6834;
+  --chart-3: #1baf7a;
+
+  /* Status is fixed, never themed, and always ships with an icon + label. */
+  --status-good: #0ca30c;
+  --status-warning: #fab219;
+  --status-serious: #ec835a;
+  --status-critical: #d03b3b;
+
+  --radius: 0.875rem;
+
+  --sidebar: oklch(0.98 0.008 285);
+  --sidebar-foreground: oklch(0.24 0.03 280);
+  --sidebar-primary: oklch(0.52 0.21 285);
+  --sidebar-primary-foreground: oklch(0.99 0.005 285);
+  --sidebar-accent: oklch(0.95 0.014 285);
+  --sidebar-accent-foreground: oklch(0.32 0.06 285);
+  --sidebar-border: oklch(0.89 0.012 285);
+  --sidebar-ring: oklch(0.52 0.21 285);
+
+  /* glass */
+  --glass-bg: oklch(1 0 0 / 55%);
+  --glass-bg-strong: oklch(1 0 0 / 72%);
+  --glass-border: oklch(1 0 0 / 70%);
+  --glass-highlight: oklch(1 0 0 / 85%);
+  --glass-blur: 20px;
+  --glass-shadow: 0 8px 32px oklch(0.35 0.08 285 / 10%),
+    0 2px 8px oklch(0.35 0.08 285 / 6%);
+  --glass-shadow-lg: 0 24px 64px oklch(0.35 0.08 285 / 16%),
+    0 8px 20px oklch(0.35 0.08 285 / 8%);
+
+  /* mesh blobs */
+  --mesh-1: oklch(0.72 0.17 285 / 42%);
+  --mesh-2: oklch(0.78 0.14 235 / 38%);
+  --mesh-3: oklch(0.82 0.13 68 / 30%);
+  --mesh-4: oklch(0.76 0.15 330 / 26%);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: oklch(0.16 0.022 280);
+  --foreground: oklch(0.95 0.008 285);
+
+  --card: oklch(0.21 0.026 280);
+  --card-foreground: oklch(0.95 0.008 285);
+  --popover: oklch(0.21 0.026 280);
+  --popover-foreground: oklch(0.95 0.008 285);
+
+  --primary: oklch(0.72 0.18 288);
+  --primary-foreground: oklch(0.17 0.04 285);
+
+  --secondary: oklch(0.27 0.03 282);
+  --secondary-foreground: oklch(0.93 0.01 285);
+
+  --muted: oklch(0.26 0.028 282);
+  --muted-foreground: oklch(0.70 0.025 285);
+
+  --accent: oklch(0.79 0.14 70);
+  --accent-foreground: oklch(0.20 0.05 60);
+
+  --destructive: oklch(0.70 0.19 22);
+  --success: oklch(0.72 0.15 160);
+  --warning: oklch(0.82 0.14 80);
+
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.72 0.18 288);
+
+  /* Same three hues re-stepped for the dark surface, not an automatic flip. */
+  --chart-1: #3987e5;
+  --chart-2: #d95926;
+  --chart-3: #199e70;
+
+  --sidebar: oklch(0.19 0.024 280);
+  --sidebar-foreground: oklch(0.95 0.008 285);
+  --sidebar-primary: oklch(0.72 0.18 288);
+  --sidebar-primary-foreground: oklch(0.17 0.04 285);
+  --sidebar-accent: oklch(0.27 0.03 282);
+  --sidebar-accent-foreground: oklch(0.93 0.01 285);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.72 0.18 288);
+
+  /* glass */
+  --glass-bg: oklch(1 0 0 / 7%);
+  --glass-bg-strong: oklch(1 0 0 / 11%);
+  --glass-border: oklch(1 0 0 / 14%);
+  --glass-highlight: oklch(1 0 0 / 22%);
+  --glass-blur: 22px;
+  --glass-shadow: 0 8px 32px oklch(0 0 0 / 36%), 0 2px 8px oklch(0 0 0 / 24%);
+  --glass-shadow-lg: 0 24px 64px oklch(0 0 0 / 48%), 0 8px 20px oklch(0 0 0 / 30%);
+
+  /* mesh blobs */
+  --mesh-1: oklch(0.55 0.22 288 / 50%);
+  --mesh-2: oklch(0.52 0.18 245 / 44%);
+  --mesh-3: oklch(0.62 0.16 60 / 26%);
+  --mesh-4: oklch(0.52 0.20 330 / 32%);
+}
+
+/* ---------------------------------------------------------------
+   Glass utilities
+   --------------------------------------------------------------- */
+
+@utility glass {
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+@utility glass-strong {
+  background-color: var(--glass-bg-strong);
+  backdrop-filter: blur(calc(var(--glass-blur) * 1.4)) saturate(190%);
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 1.4)) saturate(190%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-lg);
+}
+
+/* Thin specular highlight along the top edge — sells the "pane of glass" read. */
+@utility glass-edge {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding-top: 1px;
+    background: linear-gradient(
+      to bottom,
+      var(--glass-highlight),
+      transparent 40%
+    );
+    -webkit-mask-image: linear-gradient(#000, #000);
+    mask-image: linear-gradient(#000, #000);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+@utility mesh-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--background);
+  background-image:
+    radial-gradient(at 18% 22%, var(--mesh-1) 0px, transparent 55%),
+    radial-gradient(at 82% 12%, var(--mesh-2) 0px, transparent 50%),
+    radial-gradient(at 72% 78%, var(--mesh-3) 0px, transparent 52%),
+    radial-gradient(at 12% 84%, var(--mesh-4) 0px, transparent 48%);
+}
+
+/* Fine grain over the mesh so large gradients don't band on cheap panels. */
+@utility grain {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: 0.028;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
 }
 
 @layer base {
@@ -126,5 +271,19 @@
   }
   html {
     @apply font-sans;
+  }
+  /* Numbers in tables/stats line up column-wise. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
