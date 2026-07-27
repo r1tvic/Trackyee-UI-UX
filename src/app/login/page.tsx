@@ -13,7 +13,7 @@ import {
   Lock,
   Mail,
   TrendingUp,
-  Truck,
+  Users,
 } from "lucide-react";
 
 import { TrackyeeMark, Wordmark } from "@/components/brand";
@@ -24,23 +24,23 @@ import { Label } from "@/components/ui/label";
 
 const floatingChips = [
   {
-    icon: Truck,
-    label: "In transit",
-    value: "318",
+    icon: Users,
+    label: "Present today",
+    value: "14 / 15",
     className: "left-[4%] top-[18%]",
     delay: 0,
   },
   {
     icon: Boxes,
-    label: "Active SKUs",
-    value: "12,480",
+    label: "Picks this month",
+    value: "33,612",
     className: "right-[6%] top-[34%]",
     delay: 0.8,
   },
   {
     icon: TrendingUp,
-    label: "Fulfilled today",
-    value: "1,962",
+    label: "Avg picks / hour",
+    value: "10.4",
     className: "left-[12%] bottom-[16%]",
     delay: 1.6,
   },
@@ -56,7 +56,7 @@ export default function LoginPage() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSubmitting(true);
-    setTimeout(() => router.push("/dashboard"), 900);
+    setTimeout(() => router.push("/chat/suresh-leave"), 900);
   }
 
   const container = {
@@ -97,13 +97,13 @@ export default function LoginPage() {
             className="max-w-lg"
           >
             <h1 className="font-display text-5xl leading-[1.05] font-semibold tracking-tight xl:text-6xl">
-              Every pallet,
+              Every shift,
               <br />
               <span className="text-primary italic">accounted for.</span>
             </h1>
             <p className="text-muted-foreground mt-6 max-w-md text-lg leading-relaxed">
-              Real-time visibility across inbound, outbound, and everything
-              parked on a shelf in between.
+              Attendance, picking rates and payroll across your warehouses —
+              just ask for it.
             </p>
           </motion.div>
 
