@@ -38,19 +38,19 @@ import { Label } from "@/components/ui/label";
  */
 const floatingChips = [
   { icon: Users, label: "Present today", value: "14 / 15",
-    pos: { top: "11%", left: "5%" }, drift: -14, duration: 6.4, delay: 0, tilt: -2 },
+    pos: { top: "10%", left: "5%" }, drift: -14, duration: 6.4, delay: 0, tilt: -2 },
   { icon: Boxes, label: "Picks this month", value: "33,612",
-    pos: { top: "27%", right: "8%" }, drift: -10, duration: 7.1, delay: 0.9, tilt: 1.5 },
+    pos: { top: "18%", right: "7%" }, drift: -10, duration: 7.1, delay: 0.9, tilt: 1.5 },
   { icon: TrendingUp, label: "Avg picks / hour", value: "10.4",
-    pos: { bottom: "17%", left: "9%" }, drift: -16, duration: 5.8, delay: 1.7, tilt: 2 },
+    pos: { bottom: "13%", left: "8%" }, drift: -16, duration: 5.8, delay: 1.7, tilt: 2 },
   { icon: Moon, label: "Night shift", value: "4",
-    pos: { top: "5%", left: "43%" }, drift: -9, duration: 8.2, delay: 0.4, tilt: -1.5 },
+    pos: { top: "5%", left: "42%" }, drift: -9, duration: 8.2, delay: 0.4, tilt: -1.5 },
   { icon: Clock, label: "Overtime", value: "128 hrs",
-    pos: { top: "52%", right: "4%" }, drift: -13, duration: 6.9, delay: 2.3, tilt: 2.5 },
+    pos: { top: "23%", right: "17%" }, drift: -13, duration: 6.9, delay: 2.3, tilt: 2.5 },
   { icon: Package, label: "Units moved", value: "2,053",
-    pos: { bottom: "9%", left: "36%" }, drift: -11, duration: 5.4, delay: 1.2, tilt: -2.5 },
+    pos: { bottom: "8%", left: "38%" }, drift: -11, duration: 5.4, delay: 1.2, tilt: -2.5 },
   { icon: Zap, label: "Peak hour", value: "21:00",
-    pos: { bottom: "31%", right: "17%" }, drift: -15, duration: 7.6, delay: 2.9, tilt: 1 },
+    pos: { bottom: "20%", right: "9%" }, drift: -15, duration: 7.6, delay: 2.9, tilt: 1 },
 ];
 
 export default function LoginPage() {
@@ -96,7 +96,7 @@ export default function LoginPage() {
 
       {/* Brand panel — decorative, so it drops out entirely on small screens. */}
       <aside className="relative hidden flex-1 overflow-hidden lg:block">
-        <div className="relative flex h-full flex-col justify-between p-12 xl:p-16">
+        <div className="relative flex h-full flex-col p-12 xl:p-16">
           {/* Back to the screen index — "/" redirects here, so it would just
               reload the page. */}
           <Link
@@ -111,14 +111,16 @@ export default function LoginPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-lg"
+            // Centred in the panel rather than pinned to its left edge, so the
+            // scattered chips read as orbiting the headline.
+            className="grid flex-1 place-content-center px-4 text-center"
           >
-            <h1 className="font-display text-5xl leading-[1.05] font-semibold tracking-tight xl:text-6xl">
+            <h1 className="font-display text-6xl leading-[1.02] font-semibold tracking-tight xl:text-7xl 2xl:text-8xl">
               Every shift,
               <br />
               <span className="italic">accounted for.</span>
             </h1>
-            <p className="text-muted-foreground mt-6 max-w-md text-lg leading-relaxed">
+            <p className="text-muted-foreground mx-auto mt-8 max-w-md text-lg leading-relaxed text-balance">
               Attendance, picking rates and payroll across your warehouses —
               just ask for it.
             </p>
@@ -210,7 +212,7 @@ export default function LoginPage() {
                   autoComplete="email"
                   placeholder="you@example.com"
                   required
-                  className="bg-background/40 h-12 rounded-xl pl-10 text-base"
+                  className="bg-background/40 h-12 rounded-xl pl-10 text-[16px] md:text-base"
                 />
               </div>
             </motion.div>
@@ -236,7 +238,7 @@ export default function LoginPage() {
                   autoComplete="current-password"
                   placeholder="••••••••"
                   required
-                  className="bg-background/40 h-12 rounded-xl pr-11 pl-10 text-base"
+                  className="bg-background/40 h-12 rounded-xl pr-11 pl-10 text-[16px] md:text-base"
                 />
                 <button
                   type="button"

@@ -20,14 +20,16 @@ export function UserMessage({
       className="flex flex-col items-end gap-1"
     >
       <div className="flex items-center gap-2.5">
-        <p className="liquid-glass max-w-[min(38rem,80vw)] rounded-2xl px-4 py-2.5 text-sm">
+        <p className="liquid-glass max-w-[min(38rem,85vw)] rounded-2xl px-4 py-2.5 text-sm">
           {children}
         </p>
-        <span className="bg-foreground text-background grid size-8 shrink-0 place-items-center rounded-full">
+        {/* Avatars are dropped on phones — 42px of gutter on a 390px screen
+            is width the message and its tables need more than the icon. */}
+        <span className="bg-foreground text-background hidden size-8 shrink-0 place-items-center rounded-full sm:grid">
           <User className="size-4" />
         </span>
       </div>
-      <span className="text-muted-foreground/70 mr-11 text-xs">{at}</span>
+      <span className="text-muted-foreground/70 text-xs sm:mr-11">{at}</span>
     </motion.div>
   );
 }
@@ -48,7 +50,7 @@ export function AssistantMessage({
       transition={{ duration: 0.35 }}
       className="flex gap-2.5"
     >
-      <span className="liquid-glass grid size-8 shrink-0 place-items-center rounded-full">
+      <span className="liquid-glass hidden size-8 shrink-0 place-items-center rounded-full sm:grid">
         <TrackyeeMark className="size-4" />
       </span>
 

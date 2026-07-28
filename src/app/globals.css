@@ -321,54 +321,72 @@
    behind all content, so it never veils text.
    --------------------------------------------------------------- */
 
+/* Every size here is kept deliberately close to the viewport. A composited
+   layer larger than the GPU's max texture size (commonly 4096px) gets clipped
+   or tiled, and the boundary shows as a faint rectangle cut off near the
+   screen edges. The previous pass stacked -10% on the container and -25% on
+   the color layer, making that layer 180% of the viewport — about 4300 device
+   px on a 2.6x phone and on a 1.25x desktop, i.e. straight over the limit. */
 @utility mesh-bg {
   position: fixed;
-  /* Overscanned rather than pinned to the viewport: a fixed element sizes to
-     the small viewport, so on a phone the strip the URL bar had occupied can
-     fall outside it and expose a flat edge when the bar retracts. */
-  inset: -10%;
+  inset: 0;
   z-index: -1;
   overflow: hidden;
   background-color: var(--background);
 
-  /* Color layer. The drift is deliberately wide — at 3% and 34s the previous
-     pass was slow and small enough to read as a still image. */
+  /* Color layer. Sized to the viewport exactly — the keyframes never drop
+     below scale(1.1), and that 5%-a-side overhang already covers the drift,
+     so no CSS overscan is needed and the rasterised layer stays as small as
+     it can be. A transform doesn't enlarge it. */
   &::before {
     content: "";
     position: absolute;
-    inset: -25%;
+    inset: 0;
     background-image:
       radial-gradient(at 18% 20%, var(--mesh-1) 0px, transparent 55%),
       radial-gradient(at 82% 14%, var(--mesh-2) 0px, transparent 52%),
       radial-gradient(at 72% 84%, var(--mesh-3) 0px, transparent 54%),
       radial-gradient(at 12% 88%, var(--mesh-4) 0px, transparent 50%);
-    will-change: transform;
+    /* No will-change: a transform animation is promoted for its duration
+       anyway, and the hint would pin an oversized texture permanently. */
     animation: mesh-drift 15s ease-in-out infinite alternate;
   }
 
   /* Grain layer. Load-bearing rather than decorative: a wide, soft gradient
      posterises into visible bands on 8-bit panels, and the noise dithers
-     those steps away. */
+     those steps away. Static, so it needs no overscan at all. */
   &::after {
     content: "";
     position: absolute;
-    inset: -12%;
+    inset: 0;
     opacity: var(--noise-opacity);
     pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 }
 
-/* Translate stays well inside the ::before overscan (7% of an element that is
-   150% of the viewport is 10.5% of the viewport, against 25% of headroom), so
-   no edge can swing into view. Transform only, so it composites on the GPU. */
+/* Scale never drops below 1.1, so there is always at least 5% of overhang on
+   each side to absorb the 3.5% drift and keep an edge off screen. */
 @keyframes mesh-drift {
   from {
-    transform: translate3d(-5%, -4%, 0) scale(1);
+    transform: translate3d(-3.5%, -2.5%, 0) scale(1.1);
   }
   to {
-    transform: translate3d(7%, 5%, 0) scale(1.16);
+    transform: translate3d(3.5%, 2.5%, 0) scale(1.26);
   }
+}
+
+/* Softens the bottom edge of a scroll box. Removing the composer's opaque
+   scrim left the thread ending on the hard clip line of its scroll container,
+   which reads as content being cut off by an invisible box. A mask fades the
+   pixels out instead of painting a colour over them, so nothing is laid on
+   top of the mesh. */
+@utility scroll-fade-b {
+  mask-image: linear-gradient(
+    to bottom,
+    black calc(100% - 2.5rem),
+    transparent 100%
+  );
 }
 
 /* Per-panel grain, for surfaces that need texture away from the page
@@ -459,6 +477,15 @@
        against the browser's default size, so someone who has set a larger
        font still gets it. */
     font-size: clamp(1rem, 0.5rem + 0.625vw, 1.25rem);
+  }
+
+  /* Phones run a step down — at the desktop scale the shell felt oversized on
+     a 390px screen. Inputs opt back out to a literal 16px (see the composer
+     and login fields): below that, iOS Safari zooms the page on focus. */
+  @media (width <= 40rem) {
+    html {
+      font-size: 0.9375rem;
+    }
   }
   /* Numbers in tables/stats line up column-wise. */
   .tabular {

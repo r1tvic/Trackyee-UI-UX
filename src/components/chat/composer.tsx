@@ -32,7 +32,7 @@ export function Composer() {
           // 16px on phones: iOS Safari zooms the page in when you focus an
           // input smaller than that and never zooms back out, which wrecks
           // the whole layout for the rest of the session.
-          className="placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent py-1.5 text-base outline-none md:text-sm"
+          className="placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent py-1.5 text-[16px] outline-none md:text-sm"
         />
 
         <button
