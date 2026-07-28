@@ -88,18 +88,14 @@ export default function LoginPage() {
   };
 
   return (
-    // Both panels are capped and the pair is centred. Letting the brand panel
-    // take every spare pixel meant a 1920px screen put ~1360px behind a 512px
-    // block of copy, and flung the chips out to the far corners — the reason
-    // this screen needed more zoom than the rest of the app to look right.
-    <div className="relative mx-auto flex min-h-dvh w-full max-w-[100rem] flex-col lg:flex-row lg:justify-center">
+    <div className="relative flex min-h-dvh flex-col lg:flex-row">
       <span className="absolute top-5 right-5 z-20 flex items-center gap-1.5">
         <SoundToggle className="size-11 sm:size-9" />
         <ThemeToggle className="size-11 sm:size-9" />
       </span>
 
       {/* Brand panel — decorative, so it drops out entirely on small screens. */}
-      <aside className="relative hidden max-w-[48rem] flex-1 overflow-hidden lg:block">
+      <aside className="relative hidden flex-1 overflow-hidden lg:block">
         <div className="relative flex h-full flex-col justify-between p-12 xl:p-16">
           {/* Back to the screen index — "/" redirects here, so it would just
               reload the page. */}
