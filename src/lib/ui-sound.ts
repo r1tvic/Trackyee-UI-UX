@@ -161,14 +161,22 @@ export function useUiSounds(enabled: boolean) {
       if (!el || el === lastEl) return;
       const now = performance.now();
       // Sweeping the cursor across a list shouldn't machine-gun the speaker.
-      if (now - lastAt < 60) return;
+      if (now - lastAt < 120) return;
       lastEl = el;
       lastAt = now;
       playHover();
     }
 
     function onOut(e: PointerEvent) {
-      if (resolve(e.target) === lastEl) lastEl = null;
+      if (e.pointerType !== "mouse" || !lastEl) return;
+      // pointerout fires for every child boundary inside a control — the icon
+      // and the text label of one button are two of them. Clearing lastEl on
+      // those made the very next pointerover re-fire the blip, so a single
+      // hover rattled off several. Crossing into a descendant isn't leaving.
+      const to = e.relatedTarget as Node | null;
+      if (to && lastEl.contains(to)) return;
+      if (resolve(e.target) !== lastEl) return;
+      lastEl = null;
     }
 
     function onClick(e: MouseEvent) {

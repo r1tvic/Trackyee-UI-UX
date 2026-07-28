@@ -57,9 +57,11 @@ export function Sidebar({
 
   return (
     <div className="flex h-full flex-col gap-4 p-3">
-      <div className="flex items-center justify-between gap-2 px-1">
+      <div className="sidebar-header flex items-center justify-between gap-2 px-1">
+        {/* Not "/" — that's the login redirect now, so the brand would have
+            thrown you out of the app. */}
         <Link
-          href="/"
+          href="/chat"
           onClick={handleItemClick}
           className="flex items-center gap-2 rounded-lg focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
         >
@@ -78,10 +80,7 @@ export function Sidebar({
           }}
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           aria-expanded={!collapsed}
-          className={cn(
-            "text-muted-foreground hover:text-foreground hover:bg-foreground/8 hidden rounded-md p-1 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none lg:block",
-            collapsed && "mx-auto",
-          )}
+          className="text-muted-foreground hover:text-foreground hover:bg-foreground/8 hidden shrink-0 rounded-md p-1 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none lg:block"
         >
           {collapsed ? (
             <PanelLeft className="size-4" />

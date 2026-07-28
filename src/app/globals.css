@@ -417,18 +417,16 @@
   width: 68px;
 }
 
-/* Labels fade rather than unmount, so the rail doesn't reflow mid-transition. */
 .sidebar-label {
   white-space: nowrap;
-  transition:
-    opacity 160ms ease,
-    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-[data-sidebar-collapsed] .sidebar-label {
-  opacity: 0;
-  transform: translateX(-6px);
-  pointer-events: none;
+/* display:none, not opacity:0 — a hidden-but-laid-out label still reserves
+   its full width, so every row stayed 268px wide inside a 68px rail and got
+   clipped instead of centring. Scoped to .sidebar-rail so the mobile drawer,
+   which is always expanded, keeps its labels. */
+[data-sidebar-collapsed] .sidebar-rail .sidebar-label {
+  display: none;
 }
 
 [data-sidebar-collapsed] .sidebar-rail .sidebar-center-when-collapsed {
@@ -436,9 +434,15 @@
   padding-inline: 0;
 }
 
+/* Mark and toggle don't both fit across 44px of usable width — stack them. */
+[data-sidebar-collapsed] .sidebar-rail .sidebar-header {
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-inline: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .sidebar-rail,
-  .sidebar-label {
+  .sidebar-rail {
     transition: none;
   }
 }

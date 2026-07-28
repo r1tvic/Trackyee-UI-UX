@@ -97,8 +97,10 @@ export default function LoginPage() {
       {/* Brand panel — decorative, so it drops out entirely on small screens. */}
       <aside className="relative hidden flex-1 overflow-hidden lg:block">
         <div className="relative flex h-full flex-col justify-between p-12 xl:p-16">
+          {/* Back to the screen index — "/" redirects here, so it would just
+              reload the page. */}
           <Link
-            href="/"
+            href="/screens"
             className="flex w-fit items-center gap-2.5 rounded-lg focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
           >
             <TrackyeeMark />
@@ -178,7 +180,7 @@ export default function LoginPage() {
           className="liquid-glass-strong w-full max-w-md rounded-3xl p-8 sm:p-10"
         >
           <motion.div variants={item} className="lg:hidden">
-            <Link href="/" className="mb-8 flex w-fit items-center gap-2.5">
+            <Link href="/screens" className="mb-8 flex w-fit items-center gap-2.5">
               <TrackyeeMark />
               <Wordmark />
             </Link>
