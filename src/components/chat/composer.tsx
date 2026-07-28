@@ -7,7 +7,11 @@ export function Composer() {
   const [value, setValue] = React.useState("");
 
   return (
-    <div className="from-background via-background/90 shrink-0 bg-gradient-to-t to-transparent px-4 pt-4 pb-5 sm:px-6">
+    // No scrim here: the thread scrolls in a sibling box above this one, so
+    // nothing ever passes behind the composer. The fade this used to carry
+    // was painting an opaque slab of --background over the colour mesh, with
+    // a hard edge across the bottom of the screen.
+    <div className="shrink-0 px-4 pt-4 pb-5 sm:px-6">
       <form
         onSubmit={(e) => e.preventDefault()}
         className="liquid-glass-strong mx-auto flex max-w-3xl items-center gap-2 rounded-2xl px-3 py-2"
