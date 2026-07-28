@@ -20,7 +20,7 @@ export function UserMessage({
       className="flex flex-col items-end gap-1"
     >
       <div className="flex items-center gap-2.5">
-        <p className="glass glass-edge max-w-[min(38rem,80vw)] rounded-2xl px-4 py-2.5 text-sm">
+        <p className="liquid-glass max-w-[min(38rem,80vw)] rounded-2xl px-4 py-2.5 text-sm">
           {children}
         </p>
         <span className="bg-foreground text-background grid size-8 shrink-0 place-items-center rounded-full">

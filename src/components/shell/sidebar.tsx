@@ -72,7 +72,7 @@ export function Sidebar({
         href="/chat"
         onClick={onNavigate}
         className={cn(
-          "glass glass-edge flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium",
+          "liquid-glass flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium",
           "hover:bg-foreground/[0.07] transition-colors",
           "focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
           collapsed && "justify-center px-0",

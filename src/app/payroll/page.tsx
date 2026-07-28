@@ -17,7 +17,7 @@ export default function PayrollPage() {
   return (
     <AppShell title="Payroll" icon={CreditCard} badge="Owner View">
       <div className="mx-auto max-w-5xl space-y-4">
-        <section className="glass glass-edge rounded-2xl p-5 sm:p-6">
+        <section className="liquid-glass rounded-2xl p-5 sm:p-6">
           <h2 className="font-display flex items-center gap-2 text-lg font-semibold tracking-tight">
             <IndianRupee className="text-primary size-[18px]" />
             Pay rates
@@ -36,7 +36,7 @@ export default function PayrollPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45, delay: i * 0.06 }}
                 className={cn(
-                  "glass glass-edge rounded-xl p-4",
+                  "liquid-glass rounded-xl p-4",
                   rate.ownerOnly && "ring-foreground/20 ring-1",
                 )}
               >

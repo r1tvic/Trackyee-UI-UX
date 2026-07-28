@@ -29,7 +29,7 @@ export default function AttendancePage() {
         <div
           role="tablist"
           aria-label="Attendance view"
-          className="glass glass-edge grid grid-cols-3 gap-1 rounded-2xl p-1"
+          className="liquid-glass grid grid-cols-3 gap-1 rounded-2xl p-1"
         >
           {tabs.map((entry) => (
             <button
@@ -64,7 +64,7 @@ export default function AttendancePage() {
           >
             <ChevronLeft className="size-4" />
           </button>
-          <span className="glass glass-edge tabular rounded-xl px-4 py-2 text-sm font-medium">
+          <span className="liquid-glass tabular rounded-xl px-4 py-2 text-sm font-medium">
             28 / 07 / 2026
           </span>
           <button
@@ -91,14 +91,19 @@ export default function AttendancePage() {
             Worker status
           </h2>
 
-          <ul className="space-y-1.5">
-            {workers.map((worker, i) => (
-              <motion.li
+          {/* Animated once as a list, not 15 times. Each row is a blurred
+              surface, and staggering them meant 15 concurrent backdrop
+              recomposites. */}
+          <motion.ul
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="space-y-1.5"
+          >
+            {workers.map((worker) => (
+              <li
                 key={worker.id}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, delay: Math.min(i * 0.025, 0.4) }}
-                className="glass glass-edge hover:bg-foreground/[0.05] flex items-center gap-3 rounded-xl px-4 py-2.5 transition-colors"
+                className="liquid-glass hover:bg-foreground/[0.05] flex items-center gap-3 rounded-xl px-4 py-2.5 transition-colors"
               >
                 <span className="min-w-0 flex-1 truncate text-sm font-medium">
                   {worker.name}
@@ -112,9 +117,9 @@ export default function AttendancePage() {
                 <span className="bg-foreground/8 text-muted-foreground shrink-0 rounded-full px-2.5 py-1 text-xs">
                   Unmarked
                 </span>
-              </motion.li>
+              </li>
             ))}
-          </ul>
+          </motion.ul>
         </section>
       </div>
     </AppShell>

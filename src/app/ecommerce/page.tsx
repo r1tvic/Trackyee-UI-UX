@@ -38,7 +38,7 @@ export default function ECommercePage() {
                 transition={{ duration: 0.45, delay: i * 0.07 }}
                 whileHover={{ y: -3 }}
                 className={cn(
-                  "glass glass-edge rounded-2xl p-5 text-left transition-shadow hover:shadow-lg",
+                  "liquid-glass rounded-2xl p-5 text-left transition-shadow hover:shadow-lg",
                   "focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
                   isActive && "ring-foreground/35 ring-2",
                 )}

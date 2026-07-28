@@ -32,7 +32,7 @@ export default function ExpensesPage() {
           >
             <ChevronLeft className="size-4" />
           </button>
-          <span className="glass glass-edge rounded-xl px-4 py-2 text-sm font-medium">
+          <span className="liquid-glass rounded-xl px-4 py-2 text-sm font-medium">
             {month}
           </span>
           <button
@@ -56,7 +56,7 @@ export default function ExpensesPage() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.15 }}
-          className="glass glass-edge flex items-center gap-3 rounded-2xl p-4"
+          className="liquid-glass flex items-center gap-3 rounded-2xl p-4"
         >
           <span className="bg-foreground text-background grid size-10 shrink-0 place-items-center rounded-xl">
             <TrendingUp className="size-5" />

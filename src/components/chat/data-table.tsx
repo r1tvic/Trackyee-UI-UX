@@ -26,7 +26,7 @@ export function DataTable<T extends { [k: string]: unknown }>({
   maxHeight?: number;
 }) {
   return (
-    <div className="glass glass-edge overflow-hidden rounded-xl">
+    <div className="liquid-glass overflow-hidden rounded-xl">
       {title && (
         <p className="px-4 py-3 text-sm font-semibold">{title}</p>
       )}

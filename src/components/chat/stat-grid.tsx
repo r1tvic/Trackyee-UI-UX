@@ -26,20 +26,23 @@ export function StatGrid({
   className?: string;
 }) {
   return (
-    <div
+    // One animation on the container instead of one per tile. The tiles carry
+    // backdrop-filter, and animating each of them separately meant the blur
+    // recomposited N times a frame — that was the source of the jank.
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
         "grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4",
         className,
       )}
     >
-      {items.map((item, i) => (
-        <motion.div
+      {items.map((item) => (
+        <div
           key={item.label}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35, delay: i * 0.04 }}
           className={cn(
-            "glass glass-edge rounded-xl p-3",
+            "liquid-glass rounded-xl p-3",
             item.emphasis && "ring-foreground/15 ring-1",
           )}
         >
@@ -61,8 +64,8 @@ export function StatGrid({
           <p className="mt-2 text-xl leading-none font-semibold tracking-tight">
             {item.value}
           </p>
-        </motion.div>
+        </div>
       ))}
-    </div>
+    </motion.div>
   );
 }

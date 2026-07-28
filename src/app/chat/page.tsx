@@ -15,7 +15,7 @@ export default function ChatPage() {
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="glass glass-edge mb-5 grid size-16 place-items-center rounded-2xl"
+          className="liquid-glass mb-5 grid size-16 place-items-center rounded-2xl"
         >
           <BarChart3 className="text-primary size-7" />
         </motion.div>
@@ -47,7 +47,7 @@ export default function ChatPage() {
             <li key={prompt}>
               <button
                 type="button"
-                className="glass glass-edge hover:bg-foreground/[0.07] rounded-full px-3.5 py-2 text-sm transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+                className="liquid-glass hover:bg-foreground/[0.07] rounded-full px-3.5 py-2 text-sm transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
               >
                 {prompt}
               </button>

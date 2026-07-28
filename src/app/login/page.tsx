@@ -115,7 +115,7 @@ export default function LoginPage() {
             <motion.div
               key={chip.label}
               aria-hidden
-              className={`glass glass-edge absolute hidden items-center gap-3 rounded-2xl px-4 py-3 xl:flex ${chip.className}`}
+              className={`liquid-glass absolute hidden items-center gap-3 rounded-2xl px-4 py-3 xl:flex ${chip.className}`}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={
                 reduceMotion
@@ -159,7 +159,7 @@ export default function LoginPage() {
           variants={container}
           initial="hidden"
           animate="show"
-          className="glass-strong glass-edge w-full max-w-md rounded-3xl p-8 sm:p-10"
+          className="liquid-glass-strong w-full max-w-md rounded-3xl p-8 sm:p-10"
         >
           <motion.div variants={item} className="lg:hidden">
             <Link href="/" className="mb-8 flex w-fit items-center gap-2.5">

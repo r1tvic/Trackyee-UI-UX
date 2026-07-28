@@ -27,7 +27,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       }
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={cn(
-        "glass glass-edge relative grid size-10 place-items-center overflow-hidden rounded-full",
+        "liquid-glass relative grid size-10 place-items-center overflow-hidden rounded-full",
         "text-foreground/70 transition-colors hover:text-foreground",
         "focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
         className,

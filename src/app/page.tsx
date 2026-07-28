@@ -30,7 +30,7 @@ export default function Home() {
     <div className="flex min-h-dvh flex-col items-center justify-center p-6">
       <ThemeToggle className="absolute top-5 right-5" />
 
-      <div className="glass-strong glass-edge w-full max-w-2xl rounded-3xl p-8 sm:p-10">
+      <div className="liquid-glass-strong w-full max-w-2xl rounded-3xl p-8 sm:p-10">
         <div className="mb-6 flex items-center gap-2.5">
           <TrackyeeMark className="size-9" />
           <Wordmark className="text-2xl" />
@@ -49,7 +49,7 @@ export default function Home() {
             <li key={screen.href}>
               <Link
                 href={screen.href}
-                className="glass glass-edge group hover:bg-foreground/[0.07] flex items-center gap-2.5 rounded-xl px-4 py-3 text-sm font-medium transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+                className="liquid-glass group hover:bg-foreground/[0.07] flex items-center gap-2.5 rounded-xl px-4 py-3 text-sm font-medium transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
               >
                 <screen.icon className="text-primary size-4 shrink-0" />
                 {screen.label}

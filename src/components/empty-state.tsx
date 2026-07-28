@@ -14,7 +14,7 @@ export function EmptyState({
   hint?: string;
 }) {
   return (
-    <div className="glass glass-edge grid place-items-center rounded-2xl px-6 py-20 text-center">
+    <div className="liquid-glass grid place-items-center rounded-2xl px-6 py-20 text-center">
       <motion.div
         initial={{ opacity: 0, scale: 0.94 }}
         animate={{ opacity: 1, scale: 1 }}

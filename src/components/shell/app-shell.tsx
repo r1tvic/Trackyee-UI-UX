@@ -31,7 +31,7 @@ export function AppShell({
       <motion.aside
         animate={{ width: collapsed ? 68 : 268 }}
         transition={{ type: "spring", stiffness: 320, damping: 34 }}
-        className="glass-blur z-20 hidden shrink-0 rounded-r-2xl lg:block"
+        className="liquid-glass z-20 hidden shrink-0 rounded-r-2xl lg:block"
       >
         <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(true)} />
       </motion.aside>
@@ -52,7 +52,7 @@ export function AppShell({
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", stiffness: 340, damping: 34 }}
-              className="glass-strong fixed inset-y-0 left-0 z-50 w-[280px] lg:hidden"
+              className="liquid-glass-strong fixed inset-y-0 left-0 z-50 w-[280px] lg:hidden"
             >
               <button
                 type="button"

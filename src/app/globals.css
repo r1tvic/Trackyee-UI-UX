@@ -106,17 +106,23 @@
   --sidebar-border: oklch(0.895 0.003 85);
   --sidebar-ring: oklch(0.45 0.005 85);
 
-  /* Panels sit on a saturated backdrop, so they stay mostly opaque —
-     translucent-enough to tint, opaque-enough to keep text legible. */
-  --glass-bg: oklch(1 0 0 / 74%);
-  --glass-bg-strong: oklch(1 0 0 / 86%);
-  --glass-border: oklch(1 0 0 / 72%);
-  --glass-highlight: oklch(1 0 0 / 88%);
-  --glass-blur: 16px;
-  --glass-shadow: 0 8px 32px oklch(0.2 0.004 85 / 8%),
-    0 2px 8px oklch(0.2 0.004 85 / 5%);
-  --glass-shadow-lg: 0 24px 64px oklch(0.2 0.004 85 / 14%),
-    0 8px 20px oklch(0.2 0.004 85 / 7%);
+  /* Liquid glass. Fill stays fairly opaque because panels sit on a
+     saturated backdrop — the glassiness comes from the rim, sheen and
+     inset depth, not from letting the background flood through. */
+  --lg-fill: oklch(1 0 0 / 70%);
+  --lg-fill-strong: oklch(1 0 0 / 84%);
+  --lg-blur: 14px;
+  --lg-saturate: 180%;
+  --lg-brightness: 1.04;
+  --lg-rim: oklch(1 0 0 / 95%);
+  --lg-rim-fade: oklch(1 0 0 / 18%);
+  --lg-sheen: oklch(1 0 0 / 40%);
+  --lg-inner-light: oklch(1 0 0 / 75%);
+  --lg-inner-dark: oklch(0.2 0.004 85 / 7%);
+  --lg-shadow: 0 8px 32px oklch(0.2 0.004 85 / 9%),
+    0 2px 8px oklch(0.2 0.004 85 / 6%);
+  --lg-shadow-lg: 0 24px 64px oklch(0.2 0.004 85 / 15%),
+    0 8px 20px oklch(0.2 0.004 85 / 8%);
 
   /* The UI is monochrome; the backdrop is where the color lives. */
   --mesh-1: oklch(0.84 0.14 25 / 62%);
@@ -143,9 +149,9 @@
   --secondary-foreground: oklch(0.93 0.003 85);
 
   --muted: oklch(0.25 0.004 85);
-  /* Lifted from 0.68: panels are translucent over a saturated backdrop, and
-     over the brightest mesh the old step fell to 3.9:1. */
-  --muted-foreground: oklch(0.74 0.004 85);
+  /* Lifted twice (0.68 -> 0.74 -> 0.78) as the backdrop gained colour and the
+     panels gained translucency; measured against the worst-case mesh overlap. */
+  --muted-foreground: oklch(0.78 0.004 85);
 
   --accent: oklch(0.92 0.003 85);
   --accent-foreground: oklch(0.16 0.005 85);
@@ -158,8 +164,8 @@
 
   /* Re-stepped for the dark surface, not an inversion of the light ramp. */
   --chart-1: oklch(0.9 0.003 85);
-  --chart-2: oklch(0.74 0.004 85);
-  --chart-3: oklch(0.6 0.004 85);
+  --chart-2: oklch(0.78 0.004 85);
+  --chart-3: oklch(0.66 0.004 85);
 
   --sidebar: oklch(0.175 0.004 85);
   --sidebar-foreground: oklch(0.96 0.003 85);
@@ -170,22 +176,32 @@
   --sidebar-border: oklch(1 0 0 / 11%);
   --sidebar-ring: oklch(0.72 0.004 85);
 
-  /* Tinted toward the page rather than pure white-on-transparent, so the
-     colored backdrop reads through the panel without washing out text. */
-  --glass-bg: oklch(0.19 0.004 85 / 88%);
-  --glass-bg-strong: oklch(0.2 0.004 85 / 94%);
-  --glass-border: oklch(1 0 0 / 13%);
-  --glass-highlight: oklch(1 0 0 / 20%);
-  --glass-blur: 18px;
-  --glass-shadow: 0 8px 32px oklch(0 0 0 / 40%), 0 2px 8px oklch(0 0 0 / 26%);
-  --glass-shadow-lg: 0 24px 64px oklch(0 0 0 / 52%), 0 8px 20px oklch(0 0 0 / 32%);
+  /* Dark liquid glass: a dark film with a much brighter rim. The rim does
+     the heavy lifting here — on a dark panel it's the only cue that reads
+     as an edge catching light. */
+  --lg-fill: oklch(0.2 0.005 85 / 90%);
+  --lg-fill-strong: oklch(0.21 0.005 85 / 95%);
+  --lg-blur: 16px;
+  --lg-saturate: 170%;
+  --lg-brightness: 1.05;
+  --lg-rim: oklch(1 0 0 / 52%);
+  --lg-rim-fade: oklch(1 0 0 / 5%);
+  /* Kept low on purpose: white sheen over dark glass lands exactly where the
+     small labels sit, and at 10% it dropped muted text to 2.4:1. */
+  --lg-sheen: oklch(1 0 0 / 3%);
+  --lg-inner-light: oklch(1 0 0 / 16%);
+  --lg-inner-dark: oklch(0 0 0 / 45%);
+  --lg-shadow: 0 8px 32px oklch(0 0 0 / 42%), 0 2px 8px oklch(0 0 0 / 28%);
+  --lg-shadow-lg: 0 24px 64px oklch(0 0 0 / 54%), 0 8px 20px oklch(0 0 0 / 34%);
 
   /* Aurora — deeper and more saturated than the light set, since it has a
      near-black page to glow against. */
-  --mesh-1: oklch(0.56 0.21 320 / 62%);
-  --mesh-2: oklch(0.52 0.19 235 / 66%);
-  --mesh-3: oklch(0.54 0.17 175 / 52%);
-  --mesh-4: oklch(0.5 0.19 30 / 50%);
+  /* Alphas pulled back where all four blobs overlap — that hotspot was
+     lifting panel luminance enough to break small-text contrast. */
+  --mesh-1: oklch(0.56 0.21 320 / 50%);
+  --mesh-2: oklch(0.52 0.19 235 / 54%);
+  --mesh-3: oklch(0.54 0.17 175 / 42%);
+  --mesh-4: oklch(0.5 0.19 30 / 40%);
 
   /* Dark surfaces band more visibly, so they carry more grain. */
   --noise-opacity: 0.14;
@@ -196,56 +212,98 @@
    --------------------------------------------------------------- */
 
 /**
- * Deliberately has NO backdrop-filter.
+ * Liquid glass.
  *
- * This is the workhorse — it lands on every stat tile, list row, table and
- * chart panel, which on the chat thread alone is ~20 elements. A blurred
- * backdrop must be recomposited whenever anything above OR below it moves,
- * so pairing it with entrance animations was what made the UI feel choppy.
- * The panels are opaque enough that the tint reads without it. Reach for
- * `glass-blur` only on the few large, mostly-static surfaces where real
- * depth is worth the cost.
+ * Four layers stacked to fake a pane with real thickness:
+ *
+ *  1. backdrop-filter — blur, saturation boost and a slight brightness lift,
+ *     so what's behind reads as refracted rather than merely dimmed.
+ *  2. sheen — a soft top-down gradient painted in the element's own
+ *     background layer (NOT a pseudo-element, so it can never wash out the
+ *     text sitting above it).
+ *  3. inset shadows — a bright line along the top inner edge and a dark one
+ *     along the bottom, which is what reads as depth rather than a flat film.
+ *  4. rim (::before) — a 1px gradient border, brightest at the top and
+ *     falling off downward, drawn with the two-mask XOR trick so only the
+ *     border box paints. This is the single biggest cue that sells "glass".
+ *
+ * PERFORMANCE: this reintroduces backdrop-filter across every panel, which is
+ * what caused the earlier jank. It's affordable here only because the
+ * entrance animations on repeated elements (stat tiles, list rows) were moved
+ * up to their containers — a blurred element is cheap while static and
+ * expensive while animating. Keep it that way. If it ever needs to go, set
+ * --lg-blur to 0px and the backdrop-filter compositing drops out.
  */
-@utility glass {
-  background-color: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-}
-
-@utility glass-blur {
-  background-color: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur)) saturate(120%);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
-}
-
-@utility glass-strong {
-  background-color: var(--glass-bg-strong);
-  backdrop-filter: blur(var(--glass-blur)) saturate(130%);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(130%);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow-lg);
-}
-
-/* Thin specular highlight along the top edge — sells the "pane of glass" read. */
-@utility glass-edge {
+/* NOTE: standard properties only, no hand-written -webkit- prefixes.
+   Lightning CSS (Tailwind v4's bundler) prefixes from browserslist, and an
+   explicit prefix here makes it drop the unprefixed property instead —
+   which silently disabled backdrop-filter and mask-composite entirely. */
+@utility liquid-glass {
   position: relative;
+  background-color: var(--lg-fill);
+  background-image: linear-gradient(
+    to bottom,
+    var(--lg-sheen),
+    transparent 42%
+  );
+  backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate))
+    brightness(var(--lg-brightness));
+  box-shadow:
+    var(--lg-shadow),
+    inset 0 1px 0 var(--lg-inner-light),
+    inset 0 -1px 0 var(--lg-inner-dark);
 
   &::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    padding-top: 1px;
+    padding: 1px;
     background: linear-gradient(
-      to bottom,
-      var(--glass-highlight),
-      transparent 40%
+      160deg,
+      var(--lg-rim) 0%,
+      var(--lg-rim-fade) 45%,
+      transparent 70%
     );
-    -webkit-mask-image: linear-gradient(#000, #000);
-    mask-image: linear-gradient(#000, #000);
-    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000, #000) content-box,
+      linear-gradient(#000, #000);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/* Overlays and floating surfaces — more opaque so stacked glass stays legible. */
+@utility liquid-glass-strong {
+  position: relative;
+  background-color: var(--lg-fill-strong);
+  background-image: linear-gradient(
+    to bottom,
+    var(--lg-sheen),
+    transparent 42%
+  );
+  backdrop-filter: blur(calc(var(--lg-blur) * 1.5)) saturate(var(--lg-saturate))
+    brightness(var(--lg-brightness));
+  box-shadow:
+    var(--lg-shadow-lg),
+    inset 0 1px 0 var(--lg-inner-light),
+    inset 0 -1px 0 var(--lg-inner-dark);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      160deg,
+      var(--lg-rim) 0%,
+      var(--lg-rim-fade) 45%,
+      transparent 70%
+    );
+    mask:
+      linear-gradient(#000, #000) content-box,
+      linear-gradient(#000, #000);
     mask-composite: exclude;
     pointer-events: none;
   }

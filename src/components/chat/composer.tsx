@@ -10,7 +10,7 @@ export function Composer() {
     <div className="from-background via-background/90 shrink-0 bg-gradient-to-t to-transparent px-4 pt-4 pb-5 sm:px-6">
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="glass-strong glass-edge mx-auto flex max-w-3xl items-center gap-2 rounded-2xl px-3 py-2"
+        className="liquid-glass-strong mx-auto flex max-w-3xl items-center gap-2 rounded-2xl px-3 py-2"
       >
         <button
           type="button"

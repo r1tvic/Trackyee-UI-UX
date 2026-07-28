@@ -25,7 +25,7 @@ function Shell({
   children: React.ReactNode;
 }) {
   return (
-    <div className="glass glass-edge rounded-xl p-4">
+    <div className="liquid-glass rounded-xl p-4">
       {/* Single series — the title names it, so no legend box is needed. */}
       <p className="mb-3 text-sm font-semibold">{title}</p>
       {children}
@@ -158,7 +158,7 @@ export function LineChart({
 
         {hover !== null && (
           <div
-            className="glass-strong pointer-events-none absolute top-0 rounded-lg px-2.5 py-1.5 text-xs whitespace-nowrap shadow-lg"
+            className="liquid-glass-strong pointer-events-none absolute top-0 rounded-lg px-2.5 py-1.5 text-xs whitespace-nowrap shadow-lg"
             style={{
               left: `${(x(hover) / W) * 100}%`,
               transform: `translateX(${hover > data.length / 2 ? "-110%" : "10%"})`,
@@ -282,7 +282,7 @@ export function BarChart({
 
         {hover !== null && (
           <div
-            className="glass-strong pointer-events-none absolute top-0 rounded-lg px-2.5 py-1.5 text-xs whitespace-nowrap shadow-lg"
+            className="liquid-glass-strong pointer-events-none absolute top-0 rounded-lg px-2.5 py-1.5 text-xs whitespace-nowrap shadow-lg"
             style={{
               left: `${((PAD.left + slot * hover + slot / 2) / W) * 100}%`,
               transform: `translateX(${hover > data.length / 2 ? "-110%" : "10%"})`,
