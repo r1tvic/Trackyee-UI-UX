@@ -79,10 +79,10 @@ export default function ChatThreadPage() {
           >
             <StatGrid
               items={[
-                { label: "Total workers", value: "20", tone: "info", icon: Users },
-                { label: "Avg attendance", value: "59%", tone: "critical", icon: Percent },
-                { label: "Best day", value: "04-26", tone: "good", icon: TrendingUp },
-                { label: "Worst day", value: "04-23", tone: "critical", icon: TrendingDown },
+                { label: "Total workers", value: "20", icon: Users },
+                { label: "Avg attendance", value: "59%", icon: Percent, emphasis: true },
+                { label: "Best day", value: "04-26", icon: TrendingUp },
+                { label: "Worst day", value: "04-23", icon: TrendingDown },
               ]}
             />
 
@@ -109,14 +109,14 @@ export default function ChatThreadPage() {
           >
             <StatGrid
               items={[
-                { label: "Attendance", value: "93%", tone: "good", icon: Percent },
-                { label: "Present", value: "14", tone: "good", icon: CheckCircle2 },
-                { label: "Absent", value: "1", tone: "critical", icon: AlertTriangle },
-                { label: "Paid leave", value: "0", tone: "info", icon: Calendar },
-                { label: "Unmarked", value: "0", tone: "warning", icon: HelpCircle },
-                { label: "Total picks", value: "0", tone: "info", icon: Package },
-                { label: "Units moved", value: "0", tone: "accent", icon: Boxes },
-                { label: "Pickers active", value: "0", tone: "neutral", icon: Users },
+                { label: "Attendance", value: "93%", icon: Percent, emphasis: true },
+                { label: "Present", value: "14", icon: CheckCircle2 },
+                { label: "Absent", value: "1", icon: AlertTriangle },
+                { label: "Paid leave", value: "0", icon: Calendar },
+                { label: "Unmarked", value: "0", icon: HelpCircle },
+                { label: "Total picks", value: "0", icon: Package },
+                { label: "Units moved", value: "0", icon: Boxes },
+                { label: "Pickers active", value: "0", icon: Users },
               ]}
             />
           </AssistantMessage>
@@ -129,14 +129,14 @@ export default function ChatThreadPage() {
           >
             <StatGrid
               items={[
-                { label: "Worker", value: "shahjafe", tone: "good", icon: User },
-                { label: "Total picks", value: "425", tone: "info", icon: Package },
-                { label: "Days worked", value: "15", tone: "accent", icon: Calendar },
-                { label: "Picks/day", value: "28.3", tone: "warning", icon: TrendingUp },
-                { label: "Picks/hour", value: "10.4", tone: "good", icon: Zap },
-                { label: "Orders", value: "136", tone: "info", icon: ClipboardList },
-                { label: "Unique items", value: "360", tone: "accent", icon: Boxes },
-                { label: "Peak hour", value: "21:00", tone: "warning", icon: Clock },
+                { label: "Worker", value: "shahjafe", icon: User, emphasis: true },
+                { label: "Total picks", value: "425", icon: Package },
+                { label: "Days worked", value: "15", icon: Calendar },
+                { label: "Picks/day", value: "28.3", icon: TrendingUp },
+                { label: "Picks/hour", value: "10.4", icon: Zap },
+                { label: "Orders", value: "136", icon: ClipboardList },
+                { label: "Unique items", value: "360", icon: Boxes },
+                { label: "Peak hour", value: "21:00", icon: Clock },
               ]}
             />
 

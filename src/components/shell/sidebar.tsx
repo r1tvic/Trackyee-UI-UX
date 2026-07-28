@@ -160,7 +160,7 @@ export function Sidebar({
           collapsed && "justify-center",
         )}
       >
-        <span className="bg-accent/15 text-accent grid size-8 shrink-0 place-items-center rounded-full">
+        <span className="bg-foreground text-background grid size-8 shrink-0 place-items-center rounded-full">
           <Eye className="size-4" />
         </span>
         {!collapsed && (

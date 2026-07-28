@@ -37,7 +37,7 @@ export default function PayrollPage() {
                 transition={{ duration: 0.45, delay: i * 0.06 }}
                 className={cn(
                   "glass glass-edge rounded-xl p-4",
-                  rate.ownerOnly && "ring-primary/30 ring-1",
+                  rate.ownerOnly && "ring-foreground/20 ring-1",
                 )}
               >
                 <div className="flex items-start justify-between gap-2">
@@ -46,8 +46,8 @@ export default function PayrollPage() {
                       className={cn(
                         "grid size-7 shrink-0 place-items-center rounded-lg",
                         rate.ownerOnly
-                          ? "bg-primary/12 text-primary"
-                          : "bg-chart-1/12 text-chart-1",
+                          ? "bg-foreground text-background"
+                          : "bg-foreground/8 text-muted-foreground",
                       )}
                     >
                       {rate.ownerOnly ? (
@@ -64,7 +64,7 @@ export default function PayrollPage() {
                   </span>
 
                   {rate.ownerOnly && (
-                    <span className="bg-primary/12 text-primary ring-primary/25 shrink-0 rounded-full px-2 py-0.5 text-[0.6rem] font-semibold tracking-wide uppercase ring-1">
+                    <span className="bg-foreground text-background shrink-0 rounded-full px-2 py-0.5 text-[0.6rem] font-semibold tracking-wide uppercase">
                       Owner only
                     </span>
                   )}
@@ -86,10 +86,7 @@ export default function PayrollPage() {
                   <button
                     type="button"
                     className={cn(
-                      "inline-flex shrink-0 items-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-medium transition-opacity hover:opacity-90",
-                      rate.ownerOnly
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-chart-1 text-white",
+                      "bg-primary text-primary-foreground inline-flex shrink-0 items-center gap-1.5 rounded-lg px-2.5 py-2 text-xs font-medium transition-opacity hover:opacity-90",
                       "focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
                     )}
                   >

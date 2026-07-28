@@ -23,7 +23,7 @@ export function UserMessage({
         <p className="glass glass-edge max-w-[min(38rem,80vw)] rounded-2xl px-4 py-2.5 text-sm">
           {children}
         </p>
-        <span className="bg-accent/15 text-accent grid size-8 shrink-0 place-items-center rounded-full">
+        <span className="bg-foreground text-background grid size-8 shrink-0 place-items-center rounded-full">
           <User className="size-4" />
         </span>
       </div>

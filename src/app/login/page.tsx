@@ -99,7 +99,7 @@ export default function LoginPage() {
             <h1 className="font-display text-5xl leading-[1.05] font-semibold tracking-tight xl:text-6xl">
               Every shift,
               <br />
-              <span className="text-primary italic">accounted for.</span>
+              <span className="italic">accounted for.</span>
             </h1>
             <p className="text-muted-foreground mt-6 max-w-md text-lg leading-relaxed">
               Attendance, picking rates and payroll across your warehouses —

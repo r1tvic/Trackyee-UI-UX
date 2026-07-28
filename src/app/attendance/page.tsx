@@ -77,11 +77,11 @@ export default function AttendancePage() {
 
         <StatGrid
           items={[
-            { label: "Attendance", value: "0%", tone: "critical", icon: Percent },
-            { label: "Total", value: String(workers.length), tone: "info", icon: Users },
-            { label: "Present", value: "0", tone: "good", icon: CheckCircle2 },
-            { label: "Paid leave", value: "0", tone: "info", icon: Calendar },
-            { label: "Absent", value: "0", tone: "critical", icon: AlertTriangle },
+            { label: "Attendance", value: "0%", icon: Percent, emphasis: true },
+            { label: "Total", value: String(workers.length), icon: Users },
+            { label: "Present", value: "0", icon: CheckCircle2 },
+            { label: "Paid leave", value: "0", icon: Calendar },
+            { label: "Absent", value: "0", icon: AlertTriangle },
           ]}
           className="lg:grid-cols-5"
         />

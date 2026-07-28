@@ -40,7 +40,7 @@ export default function ECommercePage() {
                 className={cn(
                   "glass glass-edge rounded-2xl p-5 text-left transition-shadow hover:shadow-lg",
                   "focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
-                  isActive && "ring-primary/40 ring-2",
+                  isActive && "ring-foreground/35 ring-2",
                 )}
               >
                 <div className="flex items-start justify-between gap-3">
@@ -48,8 +48,8 @@ export default function ECommercePage() {
                     className={cn(
                       "grid size-10 place-items-center rounded-xl transition-colors",
                       isActive
-                        ? "bg-primary/15 text-primary"
-                        : "bg-chart-1/12 text-chart-1",
+                        ? "bg-foreground text-background"
+                        : "bg-foreground/8 text-muted-foreground",
                     )}
                   >
                     <Warehouse className="size-5" />
@@ -57,7 +57,7 @@ export default function ECommercePage() {
                   {isActive && (
                     <motion.span
                       layoutId="warehouse-active"
-                      className="bg-primary/12 text-primary ring-primary/25 inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium ring-1"
+                      className="bg-foreground text-background inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium"
                     >
                       <Check className="size-3" />
                       Active

@@ -22,16 +22,10 @@
   --color-chart-3: var(--chart-3);
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
-  --color-status-good: var(--status-good);
-  --color-status-warning: var(--status-warning);
-  --color-status-serious: var(--status-serious);
-  --color-status-critical: var(--status-critical);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
-  --color-success: var(--success);
-  --color-warning: var(--warning);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -54,129 +48,125 @@
 }
 
 /* ---------------------------------------------------------------
-   Trackyee palette
-   Amber/gold brand accent on a deep navy base — carried over from the
-   live app, which uses amber for active nav and primary actions and
-   blue for data. Glass surfaces sit on top of a soft mesh background.
+   Monochrome palette
+
+   Every token is a neutral step. A trace of warm chroma (hue 85,
+   chroma ~0.004) keeps white from going clinical and black from going
+   blue — it reads as paper and ink rather than #fff and #000, but is
+   far too low to register as a hue.
+
+   Because nothing is colored, hierarchy is carried entirely by
+   lightness, weight and spacing. There is no categorical color
+   available, so charts here are single-series by construction — see
+   the chart tokens below.
    --------------------------------------------------------------- */
 
 :root {
-  --background: oklch(0.975 0.008 260);
-  --foreground: oklch(0.24 0.03 265);
+  --background: oklch(0.975 0.003 85);
+  --foreground: oklch(0.17 0.004 85);
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.24 0.03 265);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.24 0.03 265);
+  --card: oklch(0.995 0.002 85);
+  --card-foreground: oklch(0.17 0.004 85);
+  --popover: oklch(0.995 0.002 85);
+  --popover-foreground: oklch(0.17 0.004 85);
 
-  /* Deeper on light so it still clears text contrast as active-nav ink. */
-  --primary: oklch(0.58 0.14 58);
-  --primary-foreground: oklch(0.99 0.01 80);
+  --primary: oklch(0.2 0.005 85);
+  --primary-foreground: oklch(0.98 0.002 85);
 
-  --secondary: oklch(0.95 0.012 260);
-  --secondary-foreground: oklch(0.32 0.05 265);
+  --secondary: oklch(0.945 0.003 85);
+  --secondary-foreground: oklch(0.28 0.004 85);
 
-  --muted: oklch(0.95 0.01 260);
-  --muted-foreground: oklch(0.52 0.03 263);
+  --muted: oklch(0.945 0.003 85);
+  --muted-foreground: oklch(0.505 0.004 85);
 
-  --accent: oklch(0.62 0.14 240);
-  --accent-foreground: oklch(0.99 0.01 240);
+  --accent: oklch(0.22 0.005 85);
+  --accent-foreground: oklch(0.98 0.002 85);
 
-  --destructive: oklch(0.58 0.22 25);
-  --success: oklch(0.62 0.15 158);
-  --warning: oklch(0.76 0.15 78);
+  --destructive: oklch(0.42 0.006 85);
 
-  --border: oklch(0.89 0.012 260);
-  --input: oklch(0.89 0.012 260);
-  --ring: oklch(0.58 0.14 58);
+  --border: oklch(0.895 0.003 85);
+  --input: oklch(0.895 0.003 85);
+  --ring: oklch(0.45 0.005 85);
 
-  /* Data hues are validated separately from the UI chrome. Blue leads,
-     matching the live app's charts; amber stays reserved for brand and
-     active state so a series never impersonates the accent. These three
-     clear every gate all-pairs in both modes (validate_palette.js).
-     Cap categorical series at 3. Aqua sits at 2.82:1 on a white card —
-     direct labels or the table view are required relief wherever it's used. */
-  --chart-1: #2a78d6;
-  --chart-2: #eb6834;
-  --chart-3: #1baf7a;
-
-  /* Status is fixed, never themed, and always ships with an icon + label. */
-  --status-good: #0ca30c;
-  --status-warning: #fab219;
-  --status-serious: #ec835a;
-  --status-critical: #d03b3b;
+  /* Ordinal ink ramp, dark → light. Safe for one series or for ordered
+     magnitude; it cannot separate two unordered categories, so don't
+     reach for chart-2/3 to mean "a different thing". */
+  --chart-1: oklch(0.25 0.005 85);
+  --chart-2: oklch(0.48 0.005 85);
+  --chart-3: oklch(0.64 0.004 85);
 
   --radius: 0.875rem;
 
-  --sidebar: oklch(0.98 0.008 260);
-  --sidebar-foreground: oklch(0.24 0.03 265);
-  --sidebar-primary: oklch(0.58 0.14 58);
-  --sidebar-primary-foreground: oklch(0.99 0.01 80);
-  --sidebar-accent: oklch(0.95 0.012 260);
-  --sidebar-accent-foreground: oklch(0.32 0.05 265);
-  --sidebar-border: oklch(0.89 0.012 260);
-  --sidebar-ring: oklch(0.58 0.14 58);
+  --sidebar: oklch(0.985 0.002 85);
+  --sidebar-foreground: oklch(0.17 0.004 85);
+  --sidebar-primary: oklch(0.2 0.005 85);
+  --sidebar-primary-foreground: oklch(0.98 0.002 85);
+  --sidebar-accent: oklch(0.945 0.003 85);
+  --sidebar-accent-foreground: oklch(0.28 0.004 85);
+  --sidebar-border: oklch(0.895 0.003 85);
+  --sidebar-ring: oklch(0.45 0.005 85);
 
   /* glass */
-  --glass-bg: oklch(1 0 0 / 55%);
-  --glass-bg-strong: oklch(1 0 0 / 72%);
-  --glass-border: oklch(1 0 0 / 70%);
-  --glass-highlight: oklch(1 0 0 / 85%);
+  --glass-bg: oklch(1 0 0 / 58%);
+  --glass-bg-strong: oklch(1 0 0 / 74%);
+  --glass-border: oklch(1 0 0 / 72%);
+  --glass-highlight: oklch(1 0 0 / 88%);
   --glass-blur: 20px;
-  --glass-shadow: 0 8px 32px oklch(0.35 0.06 265 / 10%),
-    0 2px 8px oklch(0.35 0.06 265 / 6%);
-  --glass-shadow-lg: 0 24px 64px oklch(0.35 0.06 265 / 16%),
-    0 8px 20px oklch(0.35 0.06 265 / 8%);
+  --glass-shadow: 0 8px 32px oklch(0.2 0.004 85 / 8%),
+    0 2px 8px oklch(0.2 0.004 85 / 5%);
+  --glass-shadow-lg: 0 24px 64px oklch(0.2 0.004 85 / 14%),
+    0 8px 20px oklch(0.2 0.004 85 / 7%);
 
-  /* mesh blobs */
-  --mesh-1: oklch(0.80 0.12 70 / 32%);
-  --mesh-2: oklch(0.78 0.14 240 / 38%);
-  --mesh-3: oklch(0.84 0.10 45 / 26%);
-  --mesh-4: oklch(0.80 0.10 210 / 26%);
+  /* Mesh blooms are pure lightness shifts — the only structure a
+     monochrome background can have. */
+  --mesh-1: oklch(0.76 0.005 85 / 55%);
+  --mesh-2: oklch(0.86 0.004 85 / 50%);
+  --mesh-3: oklch(0.8 0.004 85 / 42%);
+  --mesh-4: oklch(0.9 0.003 85 / 45%);
+
+  --noise-opacity: 0.055;
 }
 
 .dark {
-  --background: oklch(0.155 0.024 265);
-  --foreground: oklch(0.95 0.008 265);
+  --background: oklch(0.145 0.004 85);
+  --foreground: oklch(0.96 0.003 85);
 
-  --card: oklch(0.205 0.028 265);
-  --card-foreground: oklch(0.95 0.008 265);
-  --popover: oklch(0.205 0.028 265);
-  --popover-foreground: oklch(0.95 0.008 265);
+  --card: oklch(0.185 0.004 85);
+  --card-foreground: oklch(0.96 0.003 85);
+  --popover: oklch(0.185 0.004 85);
+  --popover-foreground: oklch(0.96 0.003 85);
 
-  --primary: oklch(0.80 0.14 72);
-  --primary-foreground: oklch(0.20 0.04 60);
+  --primary: oklch(0.95 0.003 85);
+  --primary-foreground: oklch(0.16 0.005 85);
 
-  --secondary: oklch(0.27 0.03 265);
-  --secondary-foreground: oklch(0.93 0.01 265);
+  --secondary: oklch(0.26 0.004 85);
+  --secondary-foreground: oklch(0.93 0.003 85);
 
-  --muted: oklch(0.26 0.028 265);
-  --muted-foreground: oklch(0.70 0.025 265);
+  --muted: oklch(0.25 0.004 85);
+  --muted-foreground: oklch(0.68 0.004 85);
 
-  --accent: oklch(0.70 0.14 240);
-  --accent-foreground: oklch(0.16 0.03 240);
+  --accent: oklch(0.92 0.003 85);
+  --accent-foreground: oklch(0.16 0.005 85);
 
-  --destructive: oklch(0.70 0.19 22);
-  --success: oklch(0.72 0.15 160);
-  --warning: oklch(0.82 0.14 80);
+  --destructive: oklch(0.7 0.005 85);
 
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.80 0.14 72);
+  --border: oklch(1 0 0 / 11%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.72 0.004 85);
 
-  /* Same three hues re-stepped for the dark surface, not an automatic flip. */
-  --chart-1: #3987e5;
-  --chart-2: #d95926;
-  --chart-3: #199e70;
+  /* Re-stepped for the dark surface, not an inversion of the light ramp. */
+  --chart-1: oklch(0.9 0.003 85);
+  --chart-2: oklch(0.68 0.004 85);
+  --chart-3: oklch(0.53 0.004 85);
 
-  --sidebar: oklch(0.185 0.026 265);
-  --sidebar-foreground: oklch(0.95 0.008 265);
-  --sidebar-primary: oklch(0.80 0.14 72);
-  --sidebar-primary-foreground: oklch(0.20 0.04 60);
-  --sidebar-accent: oklch(0.27 0.03 265);
-  --sidebar-accent-foreground: oklch(0.93 0.01 265);
-  --sidebar-border: oklch(1 0 0 / 12%);
-  --sidebar-ring: oklch(0.80 0.14 72);
+  --sidebar: oklch(0.175 0.004 85);
+  --sidebar-foreground: oklch(0.96 0.003 85);
+  --sidebar-primary: oklch(0.95 0.003 85);
+  --sidebar-primary-foreground: oklch(0.16 0.005 85);
+  --sidebar-accent: oklch(0.26 0.004 85);
+  --sidebar-accent-foreground: oklch(0.93 0.003 85);
+  --sidebar-border: oklch(1 0 0 / 11%);
+  --sidebar-ring: oklch(0.72 0.004 85);
 
   /* glass */
   --glass-bg: oklch(1 0 0 / 6%);
@@ -184,15 +174,16 @@
   --glass-border: oklch(1 0 0 / 12%);
   --glass-highlight: oklch(1 0 0 / 20%);
   --glass-blur: 22px;
-  --glass-shadow: 0 8px 32px oklch(0 0 0 / 36%), 0 2px 8px oklch(0 0 0 / 24%);
-  --glass-shadow-lg: 0 24px 64px oklch(0 0 0 / 48%), 0 8px 20px oklch(0 0 0 / 30%);
+  --glass-shadow: 0 8px 32px oklch(0 0 0 / 40%), 0 2px 8px oklch(0 0 0 / 26%);
+  --glass-shadow-lg: 0 24px 64px oklch(0 0 0 / 52%), 0 8px 20px oklch(0 0 0 / 32%);
 
-  /* Kept subtle — the live app reads as near-flat black, and a loud mesh
-     would fight that rather than elevate it. */
-  --mesh-1: oklch(0.58 0.13 70 / 22%);
-  --mesh-2: oklch(0.48 0.16 250 / 34%);
-  --mesh-3: oklch(0.52 0.12 40 / 16%);
-  --mesh-4: oklch(0.46 0.14 220 / 24%);
+  --mesh-1: oklch(0.4 0.005 85 / 50%);
+  --mesh-2: oklch(0.3 0.004 85 / 55%);
+  --mesh-3: oklch(0.36 0.005 85 / 38%);
+  --mesh-4: oklch(0.26 0.004 85 / 48%);
+
+  /* Dark surfaces band more visibly, so they carry more grain. */
+  --noise-opacity: 0.085;
 }
 
 /* ---------------------------------------------------------------
@@ -201,16 +192,16 @@
 
 @utility glass {
   background-color: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
 
 @utility glass-strong {
   background-color: var(--glass-bg-strong);
-  backdrop-filter: blur(calc(var(--glass-blur) * 1.4)) saturate(190%);
-  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 1.4)) saturate(190%);
+  backdrop-filter: blur(calc(var(--glass-blur) * 1.4)) saturate(130%);
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 1.4)) saturate(130%);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow-lg);
 }
@@ -238,19 +229,53 @@
   }
 }
 
+/* ---------------------------------------------------------------
+   Gradient noise background
+
+   Two stacked layers on one fixed element: soft lightness blooms, then
+   fractal-noise grain over the top. The grain does the real work — a
+   large flat gradient on a monochrome palette bands badly on 8-bit
+   panels, and the noise breaks up those steps. It sits at z-index -1,
+   behind all content, so it never veils text.
+   --------------------------------------------------------------- */
+
 @utility mesh-bg {
   position: fixed;
   inset: 0;
   z-index: -1;
+  overflow: hidden;
   background-color: var(--background);
   background-image:
-    radial-gradient(at 18% 22%, var(--mesh-1) 0px, transparent 55%),
-    radial-gradient(at 82% 12%, var(--mesh-2) 0px, transparent 50%),
-    radial-gradient(at 72% 78%, var(--mesh-3) 0px, transparent 52%),
-    radial-gradient(at 12% 84%, var(--mesh-4) 0px, transparent 48%);
+    radial-gradient(at 16% 18%, var(--mesh-1) 0px, transparent 52%),
+    radial-gradient(at 84% 12%, var(--mesh-2) 0px, transparent 48%),
+    radial-gradient(at 74% 82%, var(--mesh-3) 0px, transparent 50%),
+    radial-gradient(at 10% 86%, var(--mesh-4) 0px, transparent 46%);
+
+  &::after {
+    content: "";
+    position: absolute;
+    /* Overscanned so the drift never exposes an edge. */
+    inset: -12%;
+    opacity: var(--noise-opacity);
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: noise-drift 26s ease-in-out infinite;
+  }
 }
 
-/* Fine grain over the mesh so large gradients don't band on cheap panels. */
+@keyframes noise-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(2%, -1.5%, 0);
+  }
+}
+
+/* Per-panel grain, for surfaces that need texture away from the page
+   background. Kept far lighter than the background layer since this one
+   does sit above content. */
 @utility grain {
   position: relative;
 
@@ -259,9 +284,9 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    opacity: 0.028;
+    opacity: 0.02;
     pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 }
 

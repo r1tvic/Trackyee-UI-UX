@@ -37,7 +37,7 @@ export default function Home() {
         </div>
 
         <h1 className="font-display text-4xl leading-tight font-semibold tracking-tight sm:text-5xl">
-          UI/UX <span className="text-primary italic">template</span>
+          UI/UX <span className="italic">template</span>
         </h1>
         <p className="text-muted-foreground mt-3 max-w-md">
           A redesigned front end for Trackyee — glass surfaces, mixed type, and

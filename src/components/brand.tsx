@@ -1,6 +1,9 @@
 import { cn } from "@/lib/utils";
 
-/** Stacked-crates mark — reads as boxes on a shelf at small sizes. */
+/**
+ * Stacked-crates mark — reads as boxes on a shelf at small sizes.
+ * Monochrome: the top crate is separated by fill weight, not hue.
+ */
 export function TrackyeeMark({ className }: { className?: string }) {
   return (
     <svg
@@ -15,7 +18,7 @@ export function TrackyeeMark({ className }: { className?: string }) {
         width="12"
         height="12"
         rx="3"
-        className="fill-primary/25 stroke-primary"
+        className="fill-foreground/15 stroke-foreground"
         strokeWidth="1.75"
       />
       <rect
@@ -24,7 +27,7 @@ export function TrackyeeMark({ className }: { className?: string }) {
         width="12"
         height="12"
         rx="3"
-        className="fill-primary/25 stroke-primary"
+        className="fill-foreground/15 stroke-foreground"
         strokeWidth="1.75"
       />
       <rect
@@ -33,7 +36,7 @@ export function TrackyeeMark({ className }: { className?: string }) {
         width="12"
         height="12"
         rx="3"
-        className="fill-accent/30 stroke-accent"
+        className="fill-foreground stroke-foreground"
         strokeWidth="1.75"
       />
     </svg>

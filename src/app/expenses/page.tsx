@@ -45,10 +45,10 @@ export default function ExpensesPage() {
 
         <StatGrid
           items={[
-            { label: "Expenses", value: inr(expenses), tone: "critical", icon: TrendingDown },
-            { label: "Revenue", value: inr(revenue), tone: "good", icon: TrendingUp },
-            { label: "Profit / loss", value: inr(net), tone: "info", icon: IndianRupee },
-            { label: "Entries this month", value: String(entries), tone: "accent", icon: FileText },
+            { label: "Expenses", value: inr(expenses), icon: TrendingDown },
+            { label: "Revenue", value: inr(revenue), icon: TrendingUp },
+            { label: "Profit / loss", value: inr(net), icon: IndianRupee, emphasis: true },
+            { label: "Entries this month", value: String(entries), icon: FileText },
           ]}
         />
 
@@ -58,7 +58,7 @@ export default function ExpensesPage() {
           transition={{ duration: 0.45, delay: 0.15 }}
           className="glass glass-edge flex items-center gap-3 rounded-2xl p-4"
         >
-          <span className="bg-chart-1/12 text-chart-1 grid size-10 shrink-0 place-items-center rounded-xl">
+          <span className="bg-foreground text-background grid size-10 shrink-0 place-items-center rounded-xl">
             <TrendingUp className="size-5" />
           </span>
           <span className="min-w-0">
