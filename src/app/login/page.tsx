@@ -76,7 +76,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="grain relative flex min-h-dvh flex-col lg:flex-row">
+    <div className="relative flex min-h-dvh flex-col lg:flex-row">
       <ThemeToggle className="absolute top-5 right-5 z-20" />
 
       {/* Brand panel — decorative, so it drops out entirely on small screens. */}

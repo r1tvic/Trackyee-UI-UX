@@ -26,12 +26,12 @@ export function AppShell({
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   return (
-    <div className="grain flex h-dvh overflow-hidden">
+    <div className="flex h-dvh overflow-hidden">
       {/* Desktop sidebar */}
       <motion.aside
         animate={{ width: collapsed ? 68 : 268 }}
         transition={{ type: "spring", stiffness: 320, damping: 34 }}
-        className="glass z-20 hidden shrink-0 rounded-r-2xl lg:block"
+        className="glass-blur z-20 hidden shrink-0 rounded-r-2xl lg:block"
       >
         <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(true)} />
       </motion.aside>
@@ -73,7 +73,7 @@ export function AppShell({
       </AnimatePresence>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="border-border/60 flex shrink-0 items-center gap-2.5 border-b px-4 py-3.5 sm:px-6">
+        <header className="border-border/60 bg-background/70 flex shrink-0 items-center gap-2.5 border-b px-4 py-3.5 backdrop-blur-md sm:px-6">
           <button
             type="button"
             onClick={() => setMobileOpen(true)}

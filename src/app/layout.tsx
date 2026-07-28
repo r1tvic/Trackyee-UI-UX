@@ -39,10 +39,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
+        {/* enableSystem is off on purpose: with it on, next-themes follows the
+            OS and defaultTheme only applies when there's no system preference,
+            so a light-mode OS never saw the intended dark default. */}
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
+          enableSystem={false}
           disableTransitionOnChange
         >
           <div className="mesh-bg" aria-hidden />

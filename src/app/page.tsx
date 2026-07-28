@@ -27,7 +27,7 @@ const screens = [
 /** Index for the template itself — a way into every designed screen. */
 export default function Home() {
   return (
-    <div className="grain flex min-h-dvh flex-col items-center justify-center p-6">
+    <div className="flex min-h-dvh flex-col items-center justify-center p-6">
       <ThemeToggle className="absolute top-5 right-5" />
 
       <div className="glass-strong glass-edge w-full max-w-2xl rounded-3xl p-8 sm:p-10">

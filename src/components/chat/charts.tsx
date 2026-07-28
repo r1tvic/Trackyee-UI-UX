@@ -249,15 +249,20 @@ export function BarChart({
                   height={PLOT_H}
                   fill="transparent"
                 />
+                {/* Grows via scaleY off the baseline rather than animating
+                    `height`, which would repaint the chart every frame. */}
                 <motion.rect
                   x={cx - barW / 2}
+                  y={top}
                   width={barW}
+                  height={height}
                   rx="4"
                   fill={color}
                   opacity={hover === null || hover === i ? 1 : 0.45}
-                  initial={reduceMotion ? undefined : { y: PAD.top + PLOT_H, height: 0 }}
-                  animate={{ y: top, height }}
-                  transition={{ duration: 0.5, delay: i * 0.015, ease: "easeOut" }}
+                  style={{ transformBox: "fill-box", transformOrigin: "bottom" }}
+                  initial={reduceMotion ? undefined : { scaleY: 0 }}
+                  animate={reduceMotion ? undefined : { scaleY: 1 }}
+                  transition={{ duration: 0.45, delay: i * 0.012, ease: "easeOut" }}
                 />
                 {i % stride === 0 && (
                   <text

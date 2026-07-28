@@ -106,25 +106,25 @@
   --sidebar-border: oklch(0.895 0.003 85);
   --sidebar-ring: oklch(0.45 0.005 85);
 
-  /* glass */
-  --glass-bg: oklch(1 0 0 / 58%);
-  --glass-bg-strong: oklch(1 0 0 / 74%);
+  /* Panels sit on a saturated backdrop, so they stay mostly opaque —
+     translucent-enough to tint, opaque-enough to keep text legible. */
+  --glass-bg: oklch(1 0 0 / 74%);
+  --glass-bg-strong: oklch(1 0 0 / 86%);
   --glass-border: oklch(1 0 0 / 72%);
   --glass-highlight: oklch(1 0 0 / 88%);
-  --glass-blur: 20px;
+  --glass-blur: 16px;
   --glass-shadow: 0 8px 32px oklch(0.2 0.004 85 / 8%),
     0 2px 8px oklch(0.2 0.004 85 / 5%);
   --glass-shadow-lg: 0 24px 64px oklch(0.2 0.004 85 / 14%),
     0 8px 20px oklch(0.2 0.004 85 / 7%);
 
-  /* Mesh blooms are pure lightness shifts — the only structure a
-     monochrome background can have. */
-  --mesh-1: oklch(0.76 0.005 85 / 55%);
-  --mesh-2: oklch(0.86 0.004 85 / 50%);
-  --mesh-3: oklch(0.8 0.004 85 / 42%);
-  --mesh-4: oklch(0.9 0.003 85 / 45%);
+  /* The UI is monochrome; the backdrop is where the color lives. */
+  --mesh-1: oklch(0.84 0.14 25 / 62%);
+  --mesh-2: oklch(0.86 0.13 195 / 58%);
+  --mesh-3: oklch(0.83 0.15 300 / 52%);
+  --mesh-4: oklch(0.9 0.13 90 / 52%);
 
-  --noise-opacity: 0.055;
+  --noise-opacity: 0.1;
 }
 
 .dark {
@@ -143,7 +143,9 @@
   --secondary-foreground: oklch(0.93 0.003 85);
 
   --muted: oklch(0.25 0.004 85);
-  --muted-foreground: oklch(0.68 0.004 85);
+  /* Lifted from 0.68: panels are translucent over a saturated backdrop, and
+     over the brightest mesh the old step fell to 3.9:1. */
+  --muted-foreground: oklch(0.74 0.004 85);
 
   --accent: oklch(0.92 0.003 85);
   --accent-foreground: oklch(0.16 0.005 85);
@@ -156,8 +158,8 @@
 
   /* Re-stepped for the dark surface, not an inversion of the light ramp. */
   --chart-1: oklch(0.9 0.003 85);
-  --chart-2: oklch(0.68 0.004 85);
-  --chart-3: oklch(0.53 0.004 85);
+  --chart-2: oklch(0.74 0.004 85);
+  --chart-3: oklch(0.6 0.004 85);
 
   --sidebar: oklch(0.175 0.004 85);
   --sidebar-foreground: oklch(0.96 0.003 85);
@@ -168,29 +170,49 @@
   --sidebar-border: oklch(1 0 0 / 11%);
   --sidebar-ring: oklch(0.72 0.004 85);
 
-  /* glass */
-  --glass-bg: oklch(1 0 0 / 6%);
-  --glass-bg-strong: oklch(1 0 0 / 10%);
-  --glass-border: oklch(1 0 0 / 12%);
+  /* Tinted toward the page rather than pure white-on-transparent, so the
+     colored backdrop reads through the panel without washing out text. */
+  --glass-bg: oklch(0.19 0.004 85 / 88%);
+  --glass-bg-strong: oklch(0.2 0.004 85 / 94%);
+  --glass-border: oklch(1 0 0 / 13%);
   --glass-highlight: oklch(1 0 0 / 20%);
-  --glass-blur: 22px;
+  --glass-blur: 18px;
   --glass-shadow: 0 8px 32px oklch(0 0 0 / 40%), 0 2px 8px oklch(0 0 0 / 26%);
   --glass-shadow-lg: 0 24px 64px oklch(0 0 0 / 52%), 0 8px 20px oklch(0 0 0 / 32%);
 
-  --mesh-1: oklch(0.4 0.005 85 / 50%);
-  --mesh-2: oklch(0.3 0.004 85 / 55%);
-  --mesh-3: oklch(0.36 0.005 85 / 38%);
-  --mesh-4: oklch(0.26 0.004 85 / 48%);
+  /* Aurora — deeper and more saturated than the light set, since it has a
+     near-black page to glow against. */
+  --mesh-1: oklch(0.56 0.21 320 / 62%);
+  --mesh-2: oklch(0.52 0.19 235 / 66%);
+  --mesh-3: oklch(0.54 0.17 175 / 52%);
+  --mesh-4: oklch(0.5 0.19 30 / 50%);
 
   /* Dark surfaces band more visibly, so they carry more grain. */
-  --noise-opacity: 0.085;
+  --noise-opacity: 0.14;
 }
 
 /* ---------------------------------------------------------------
    Glass utilities
    --------------------------------------------------------------- */
 
+/**
+ * Deliberately has NO backdrop-filter.
+ *
+ * This is the workhorse — it lands on every stat tile, list row, table and
+ * chart panel, which on the chat thread alone is ~20 elements. A blurred
+ * backdrop must be recomposited whenever anything above OR below it moves,
+ * so pairing it with entrance animations was what made the UI feel choppy.
+ * The panels are opaque enough that the tint reads without it. Reach for
+ * `glass-blur` only on the few large, mostly-static surfaces where real
+ * depth is worth the cost.
+ */
 @utility glass {
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+@utility glass-blur {
   background-color: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur)) saturate(120%);
   -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
@@ -200,8 +222,8 @@
 
 @utility glass-strong {
   background-color: var(--glass-bg-strong);
-  backdrop-filter: blur(calc(var(--glass-blur) * 1.4)) saturate(130%);
-  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 1.4)) saturate(130%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(130%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(130%);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow-lg);
 }
@@ -245,21 +267,47 @@
   z-index: -1;
   overflow: hidden;
   background-color: var(--background);
-  background-image:
-    radial-gradient(at 16% 18%, var(--mesh-1) 0px, transparent 52%),
-    radial-gradient(at 84% 12%, var(--mesh-2) 0px, transparent 48%),
-    radial-gradient(at 74% 82%, var(--mesh-3) 0px, transparent 50%),
-    radial-gradient(at 10% 86%, var(--mesh-4) 0px, transparent 46%);
 
+  /* Color layer. Overscanned and pre-scaled so the drift never exposes an
+     edge, and animated on transform alone so it stays GPU-composited. */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background-image:
+      radial-gradient(at 18% 20%, var(--mesh-1) 0px, transparent 55%),
+      radial-gradient(at 82% 14%, var(--mesh-2) 0px, transparent 52%),
+      radial-gradient(at 72% 84%, var(--mesh-3) 0px, transparent 54%),
+      radial-gradient(at 12% 88%, var(--mesh-4) 0px, transparent 50%);
+    will-change: transform;
+    animation: mesh-drift 34s ease-in-out infinite;
+  }
+
+  /* Grain layer. Load-bearing rather than decorative: a wide, soft gradient
+     posterises into visible bands on 8-bit panels, and the noise dithers
+     those steps away. */
   &::after {
     content: "";
     position: absolute;
-    /* Overscanned so the drift never exposes an edge. */
     inset: -12%;
     opacity: var(--noise-opacity);
     pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    will-change: transform;
     animation: noise-drift 26s ease-in-out infinite;
+  }
+}
+
+@keyframes mesh-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(3%, -2%, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(-2%, 2.5%, 0) scale(1.04);
   }
 }
 
