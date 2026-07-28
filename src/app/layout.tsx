@@ -38,6 +38,17 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        {/* Runs before first paint so a collapsed sidebar is already narrow
+            when the page appears. Without it the rail renders expanded, then
+            visibly animates shut on every navigation. Must live in <head> — a
+            <script> directly inside <html> is invalid and breaks hydration. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem('trackyee:sidebar-collapsed')==='true'){document.documentElement.setAttribute('data-sidebar-collapsed','')}}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         {/* enableSystem is off on purpose: with it on, next-themes follows the
             OS and defaultTheme only applies when there's no system preference,

@@ -62,67 +62,69 @@
    --------------------------------------------------------------- */
 
 :root {
-  --background: oklch(0.975 0.003 85);
-  --foreground: oklch(0.17 0.004 85);
+  /* Warm beige rather than white. Chroma is up ~4x from the original neutral
+     (0.003 -> 0.016) and lightness down to 0.945, which takes the glare off
+     without reading as a colour — it's paper, not a tint. */
+  --background: oklch(0.945 0.016 85);
+  --foreground: oklch(0.19 0.01 85);
 
-  --card: oklch(0.995 0.002 85);
-  --card-foreground: oklch(0.17 0.004 85);
-  --popover: oklch(0.995 0.002 85);
-  --popover-foreground: oklch(0.17 0.004 85);
+  --card: oklch(0.985 0.01 85);
+  --card-foreground: oklch(0.19 0.01 85);
+  --popover: oklch(0.985 0.01 85);
+  --popover-foreground: oklch(0.19 0.01 85);
 
-  --primary: oklch(0.2 0.005 85);
-  --primary-foreground: oklch(0.98 0.002 85);
+  --primary: oklch(0.21 0.012 85);
+  --primary-foreground: oklch(0.97 0.008 85);
 
-  --secondary: oklch(0.945 0.003 85);
-  --secondary-foreground: oklch(0.28 0.004 85);
+  --secondary: oklch(0.915 0.014 85);
+  --secondary-foreground: oklch(0.29 0.012 85);
 
-  --muted: oklch(0.945 0.003 85);
-  --muted-foreground: oklch(0.505 0.004 85);
+  --muted: oklch(0.915 0.014 85);
+  --muted-foreground: oklch(0.48 0.012 85);
 
-  --accent: oklch(0.22 0.005 85);
-  --accent-foreground: oklch(0.98 0.002 85);
+  --accent: oklch(0.23 0.012 85);
+  --accent-foreground: oklch(0.97 0.008 85);
 
-  --destructive: oklch(0.42 0.006 85);
+  --destructive: oklch(0.43 0.014 85);
 
-  --border: oklch(0.895 0.003 85);
-  --input: oklch(0.895 0.003 85);
-  --ring: oklch(0.45 0.005 85);
+  --border: oklch(0.865 0.014 85);
+  --input: oklch(0.865 0.014 85);
+  --ring: oklch(0.46 0.012 85);
 
   /* Ordinal ink ramp, dark → light. Safe for one series or for ordered
      magnitude; it cannot separate two unordered categories, so don't
      reach for chart-2/3 to mean "a different thing". */
-  --chart-1: oklch(0.25 0.005 85);
-  --chart-2: oklch(0.48 0.005 85);
-  --chart-3: oklch(0.64 0.004 85);
+  --chart-1: oklch(0.26 0.012 85);
+  --chart-2: oklch(0.49 0.012 85);
+  --chart-3: oklch(0.62 0.012 85);
 
   --radius: 0.875rem;
 
-  --sidebar: oklch(0.985 0.002 85);
-  --sidebar-foreground: oklch(0.17 0.004 85);
-  --sidebar-primary: oklch(0.2 0.005 85);
-  --sidebar-primary-foreground: oklch(0.98 0.002 85);
-  --sidebar-accent: oklch(0.945 0.003 85);
-  --sidebar-accent-foreground: oklch(0.28 0.004 85);
-  --sidebar-border: oklch(0.895 0.003 85);
-  --sidebar-ring: oklch(0.45 0.005 85);
+  --sidebar: oklch(0.96 0.014 85);
+  --sidebar-foreground: oklch(0.19 0.01 85);
+  --sidebar-primary: oklch(0.21 0.012 85);
+  --sidebar-primary-foreground: oklch(0.97 0.008 85);
+  --sidebar-accent: oklch(0.915 0.014 85);
+  --sidebar-accent-foreground: oklch(0.29 0.012 85);
+  --sidebar-border: oklch(0.865 0.014 85);
+  --sidebar-ring: oklch(0.46 0.012 85);
 
-  /* Liquid glass. Fill stays fairly opaque because panels sit on a
-     saturated backdrop — the glassiness comes from the rim, sheen and
-     inset depth, not from letting the background flood through. */
-  --lg-fill: oklch(1 0 0 / 70%);
-  --lg-fill-strong: oklch(1 0 0 / 84%);
+  /* Liquid glass. The fill is a warm off-white, not pure white — a #fff panel
+     on a beige page reads as a hole punched in it. */
+  --lg-fill: oklch(0.99 0.012 85 / 72%);
+  --lg-fill-strong: oklch(0.99 0.012 85 / 86%);
   --lg-blur: 14px;
   --lg-saturate: 180%;
-  --lg-brightness: 1.04;
-  --lg-rim: oklch(1 0 0 / 95%);
-  --lg-rim-fade: oklch(1 0 0 / 18%);
-  --lg-sheen: oklch(1 0 0 / 40%);
-  --lg-inner-light: oklch(1 0 0 / 75%);
-  --lg-inner-dark: oklch(0.2 0.004 85 / 7%);
-  --lg-shadow: 0 8px 32px oklch(0.2 0.004 85 / 9%),
-    0 2px 8px oklch(0.2 0.004 85 / 6%);
-  --lg-shadow-lg: 0 24px 64px oklch(0.2 0.004 85 / 15%),
-    0 8px 20px oklch(0.2 0.004 85 / 8%);
+  --lg-brightness: 1.02;
+  --lg-rim: oklch(1 0.006 85 / 92%);
+  --lg-rim-fade: oklch(1 0.006 85 / 18%);
+  --lg-sheen: oklch(1 0.006 85 / 30%);
+  --lg-inner-light: oklch(1 0.006 85 / 70%);
+  --lg-inner-dark: oklch(0.25 0.02 70 / 8%);
+  --lg-shadow: 0 8px 32px oklch(0.25 0.02 70 / 10%),
+    0 2px 8px oklch(0.25 0.02 70 / 6%);
+  --lg-shadow-lg: 0 24px 64px oklch(0.25 0.02 70 / 16%),
+    0 8px 20px oklch(0.25 0.02 70 / 8%);
 
   /* The UI is monochrome; the backdrop is where the color lives. */
   --mesh-1: oklch(0.84 0.14 25 / 62%);
@@ -393,6 +395,51 @@
     opacity: 0.02;
     pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* ---------------------------------------------------------------
+   Sidebar rail
+
+   Width and label visibility are driven by a data attribute on <html>
+   set by a pre-paint script, not by React state. That keeps server and
+   client markup identical (labels are always in the DOM, just hidden),
+   so there's no hydration mismatch and no flash of an expanded rail
+   before it collapses.
+   --------------------------------------------------------------- */
+
+.sidebar-rail {
+  width: 268px;
+  transition: width 340ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-sidebar-collapsed] .sidebar-rail {
+  width: 68px;
+}
+
+/* Labels fade rather than unmount, so the rail doesn't reflow mid-transition. */
+.sidebar-label {
+  white-space: nowrap;
+  transition:
+    opacity 160ms ease,
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-sidebar-collapsed] .sidebar-label {
+  opacity: 0;
+  transform: translateX(-6px);
+  pointer-events: none;
+}
+
+[data-sidebar-collapsed] .sidebar-rail .sidebar-center-when-collapsed {
+  justify-content: center;
+  padding-inline: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-rail,
+  .sidebar-label {
+    transition: none;
   }
 }
 

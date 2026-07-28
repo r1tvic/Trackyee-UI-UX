@@ -9,11 +9,15 @@ import { cn } from "@/lib/utils";
 
 export function ThemeToggle({ className }: { className?: string }) {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
 
   // Theme isn't known until after hydration; render a placeholder so the
-  // button doesn't flash the wrong icon.
-  React.useEffect(() => setMounted(true), []);
+  // button doesn't flash the wrong icon. useSyncExternalStore gives a
+  // false-on-server/true-on-client flag without a setState-in-effect cascade.
+  const mounted = React.useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   const isDark = resolvedTheme === "dark";
 

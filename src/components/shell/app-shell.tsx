@@ -4,7 +4,8 @@ import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, type LucideIcon } from "lucide-react";
 
-import { Sidebar, SidebarExpandButton } from "@/components/shell/sidebar";
+import { Sidebar } from "@/components/shell/sidebar";
+import { useSidebarCollapsed } from "@/components/shell/use-sidebar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
@@ -22,19 +23,38 @@ export function AppShell({
   fullBleed?: boolean;
   children: React.ReactNode;
 }) {
-  const [collapsed, setCollapsed] = React.useState(false);
+  const { collapsed, setCollapsed } = useSidebarCollapsed();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   return (
-    <div className="flex h-dvh overflow-hidden">
-      {/* Desktop sidebar */}
-      <motion.aside
-        animate={{ width: collapsed ? 68 : 268 }}
-        transition={{ type: "spring", stiffness: 320, damping: 34 }}
-        className="liquid-glass z-20 hidden shrink-0 rounded-r-2xl lg:block"
+    <div className="flex h-dvh gap-3 overflow-hidden p-3">
+      {/* Desktop sidebar. When collapsed the whole rail is the expand target;
+          children stop propagation so links still just navigate. */}
+      <aside
+        onClick={collapsed ? () => setCollapsed(false) : undefined}
+        role={collapsed ? "button" : undefined}
+        tabIndex={collapsed ? 0 : undefined}
+        aria-label={collapsed ? "Expand sidebar" : undefined}
+        onKeyDown={
+          collapsed
+            ? (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setCollapsed(false);
+                }
+              }
+            : undefined
+        }
+        className={cn(
+          "liquid-glass sidebar-rail z-20 hidden shrink-0 overflow-hidden rounded-2xl lg:block",
+          collapsed && "hover:bg-foreground/[0.04] cursor-e-resize",
+        )}
       >
-        <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(true)} />
-      </motion.aside>
+        <Sidebar
+          collapsed={collapsed}
+          onToggle={() => setCollapsed(!collapsed)}
+        />
+      </aside>
 
       {/* Mobile drawer */}
       <AnimatePresence>
@@ -72,8 +92,10 @@ export function AppShell({
         )}
       </AnimatePresence>
 
-      <div className="flex min-w-0 flex-1 flex-col">
-        <header className="border-border/60 bg-background/70 flex shrink-0 items-center gap-2.5 border-b px-4 py-3.5 backdrop-blur-md sm:px-6">
+      <div className="flex min-w-0 flex-1 flex-col gap-3">
+        {/* Rounded panel rather than a full-bleed bar — a square-cornered
+            header butted against the rounded sidebar read as a mistake. */}
+        <header className="liquid-glass flex shrink-0 items-center gap-2.5 rounded-2xl px-4 py-3 sm:px-5">
           <button
             type="button"
             onClick={() => setMobileOpen(true)}
@@ -82,12 +104,6 @@ export function AppShell({
           >
             <Menu className="size-4" />
           </button>
-
-          {collapsed && (
-            <span className="hidden lg:block">
-              <SidebarExpandButton onClick={() => setCollapsed(false)} />
-            </span>
-          )}
 
           {Icon && <Icon className="text-primary size-[18px] shrink-0" />}
           <h1 className="font-display truncate text-lg font-semibold tracking-tight">
@@ -105,7 +121,9 @@ export function AppShell({
         <main
           className={cn(
             "min-h-0 flex-1",
-            fullBleed ? "flex flex-col overflow-hidden" : "overflow-y-auto p-4 sm:p-6",
+            fullBleed
+              ? "flex flex-col overflow-hidden"
+              : "overflow-y-auto pb-1",
           )}
         >
           {children}
