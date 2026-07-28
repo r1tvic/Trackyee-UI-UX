@@ -71,7 +71,7 @@ export default function PayrollPage() {
                 </div>
 
                 <div className="mt-3 flex items-center gap-2">
-                  <div className="glass focus-within:ring-ring/50 flex min-w-0 flex-1 items-center gap-1 rounded-lg px-2.5 py-1.5 focus-within:ring-3">
+                  <div className="liquid-glass focus-within:ring-ring/50 flex min-w-0 flex-1 items-center gap-1 rounded-lg px-2.5 py-1.5 focus-within:ring-3">
                     <span className="text-muted-foreground shrink-0 text-sm">₹</span>
                     <input
                       value={values[rate.id]}

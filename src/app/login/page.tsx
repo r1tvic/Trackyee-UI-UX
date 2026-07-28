@@ -88,14 +88,18 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="relative flex min-h-dvh flex-col lg:flex-row">
+    // Both panels are capped and the pair is centred. Letting the brand panel
+    // take every spare pixel meant a 1920px screen put ~1360px behind a 512px
+    // block of copy, and flung the chips out to the far corners — the reason
+    // this screen needed more zoom than the rest of the app to look right.
+    <div className="relative mx-auto flex min-h-dvh w-full max-w-[100rem] flex-col lg:flex-row lg:justify-center">
       <span className="absolute top-5 right-5 z-20 flex items-center gap-1.5">
-        <SoundToggle />
-        <ThemeToggle className="size-9" />
+        <SoundToggle className="size-11 sm:size-9" />
+        <ThemeToggle className="size-11 sm:size-9" />
       </span>
 
       {/* Brand panel — decorative, so it drops out entirely on small screens. */}
-      <aside className="relative hidden flex-1 overflow-hidden lg:block">
+      <aside className="relative hidden max-w-[48rem] flex-1 overflow-hidden lg:block">
         <div className="relative flex h-full flex-col justify-between p-12 xl:p-16">
           {/* Back to the screen index — "/" redirects here, so it would just
               reload the page. */}
@@ -172,7 +176,7 @@ export default function LoginPage() {
       </aside>
 
       {/* Form panel */}
-      <main className="flex flex-1 items-center justify-center p-6 sm:p-10 lg:max-w-[560px]">
+      <main className="flex flex-1 items-center justify-center p-6 sm:p-10 lg:max-w-[35rem]">
         <motion.div
           variants={container}
           initial="hidden"
@@ -242,7 +246,7 @@ export default function LoginPage() {
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
                   aria-label={showPassword ? "Hide password" : "Show password"}
-                  className="text-muted-foreground hover:text-foreground absolute top-1/2 right-3 -translate-y-1/2 rounded p-1 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+                  className="text-muted-foreground hover:text-foreground absolute top-1/2 right-1 grid size-11 -translate-y-1/2 place-items-center rounded transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none sm:right-2 sm:size-9"
                 >
                   {showPassword ? (
                     <EyeOff className="size-4" />

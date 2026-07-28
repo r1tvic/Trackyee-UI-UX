@@ -408,13 +408,15 @@
    before it collapses.
    --------------------------------------------------------------- */
 
+/* rem, not px, so the rail grows in step with the fluid root font size —
+   fixed widths here would leave the labels cramped on a large screen. */
 .sidebar-rail {
-  width: 268px;
+  width: 16.75rem;
   transition: width 340ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 [data-sidebar-collapsed] .sidebar-rail {
-  width: 68px;
+  width: 4.25rem;
 }
 
 .sidebar-label {
@@ -456,6 +458,17 @@
   }
   html {
     @apply font-sans;
+
+    /* Type and spacing scale with the viewport instead of sitting at a fixed
+       16px, which left a 1920px screen 40% empty and pushed people to zoom
+       to 125% to fill it. Tailwind's spacing, max-w-* and font sizes are all
+       rem, so this scales the whole system in one place: 16px at 1280 and
+       below, 20px at 1920 and above, linear between.
+
+       Written in rem, not px, on purpose — on the root element rem resolves
+       against the browser's default size, so someone who has set a larger
+       font still gets it. */
+    font-size: clamp(1rem, 0.5rem + 0.625vw, 1.25rem);
   }
   /* Numbers in tables/stats line up column-wise. */
   .tabular {

@@ -48,7 +48,7 @@ export function AssistantMessage({
       transition={{ duration: 0.35 }}
       className="flex gap-2.5"
     >
-      <span className="glass grid size-8 shrink-0 place-items-center rounded-full">
+      <span className="liquid-glass grid size-8 shrink-0 place-items-center rounded-full">
         <TrackyeeMark className="size-4" />
       </span>
 

@@ -15,7 +15,7 @@ export function Composer() {
         <button
           type="button"
           aria-label="Attach an Excel file"
-          className="text-muted-foreground hover:text-foreground rounded-lg p-2 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+          className="text-muted-foreground hover:text-foreground grid size-11 shrink-0 place-items-center rounded-lg transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none sm:size-9"
         >
           <Paperclip className="size-[18px]" />
         </button>
@@ -25,14 +25,17 @@ export function Composer() {
           onChange={(e) => setValue(e.target.value)}
           placeholder="Ask about picking data, attendance, expenses…"
           aria-label="Message"
-          className="placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent py-1.5 text-sm outline-none"
+          // 16px on phones: iOS Safari zooms the page in when you focus an
+          // input smaller than that and never zooms back out, which wrecks
+          // the whole layout for the rest of the session.
+          className="placeholder:text-muted-foreground min-w-0 flex-1 bg-transparent py-1.5 text-base outline-none md:text-sm"
         />
 
         <button
           type="submit"
           disabled={!value.trim()}
           aria-label="Send"
-          className="bg-primary text-primary-foreground grid size-9 shrink-0 place-items-center rounded-xl transition-opacity disabled:opacity-40 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+          className="bg-primary text-primary-foreground grid size-11 shrink-0 place-items-center rounded-xl transition-opacity disabled:opacity-40 focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none sm:size-9"
         >
           <SendHorizontal className="size-4" />
         </button>

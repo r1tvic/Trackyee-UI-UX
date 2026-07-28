@@ -28,7 +28,7 @@ export default function ExpensesPage() {
         <div className="flex items-center justify-center gap-2">
           <button
             aria-label="Previous month"
-            className="glass hover:bg-foreground/[0.07] rounded-xl p-2 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+            className="liquid-glass hover:bg-foreground/[0.07] grid size-11 place-items-center rounded-xl transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none sm:size-9"
           >
             <ChevronLeft className="size-4" />
           </button>
@@ -37,7 +37,7 @@ export default function ExpensesPage() {
           </span>
           <button
             aria-label="Next month"
-            className="glass hover:bg-foreground/[0.07] rounded-xl p-2 transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+            className="liquid-glass hover:bg-foreground/[0.07] grid size-11 place-items-center rounded-xl transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none sm:size-9"
           >
             <ChevronRight className="size-4" />
           </button>

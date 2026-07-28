@@ -105,24 +105,32 @@ export function AppShell({
             type="button"
             onClick={() => setMobileOpen(true)}
             aria-label="Open menu"
-            className="text-muted-foreground hover:text-foreground rounded-md p-1.5 transition-colors lg:hidden"
+            className="text-muted-foreground hover:text-foreground -ml-1.5 grid size-11 shrink-0 place-items-center rounded-md transition-colors lg:hidden"
           >
-            <Menu className="size-4" />
+            <Menu className="size-5" />
           </button>
 
-          {Icon && <Icon className="text-primary size-[18px] shrink-0" />}
+          {/* Dropped on phones so the title gets the width instead — the
+              hamburger and the two toggles already claim most of the bar. */}
+          {Icon && (
+            <Icon className="text-primary hidden size-[18px] shrink-0 sm:block" />
+          )}
           <h1 className="font-display truncate text-lg font-semibold tracking-tight">
             {title}
           </h1>
+          {/* Hidden on phones — next to the title it left only 86px for the
+              text, truncating most chat titles to a few characters. */}
           {badge && (
-            <span className="bg-primary/12 text-primary ring-primary/25 shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium ring-1">
+            <span className="bg-primary/12 text-primary ring-primary/25 hidden shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 sm:inline">
               {badge}
             </span>
           )}
 
           <span className="ml-auto flex shrink-0 items-center gap-1.5">
-            <SoundToggle />
-            <ThemeToggle className="size-9" />
+            {/* 44px on phones — the 36px desktop size is below the minimum
+                comfortable touch target. */}
+            <SoundToggle className="size-11 sm:size-9" />
+            <ThemeToggle className="size-11 sm:size-9" />
           </span>
         </header>
 
