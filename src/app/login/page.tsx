@@ -7,43 +7,50 @@ import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   Boxes,
+  Clock,
   Eye,
   EyeOff,
   Loader2,
   Lock,
   Mail,
+  Moon,
+  Package,
   TrendingUp,
   Users,
+  Zap,
 } from "lucide-react";
 
 import { TrackyeeMark, Wordmark } from "@/components/brand";
+import { SoundToggle } from "@/components/sound-toggle";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useSoundEnabled, useUiSounds } from "@/lib/ui-sound";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+/**
+ * Decorative stat chips scattered behind the brand copy.
+ *
+ * Positions, drift distance, duration and delay are all hand-picked rather
+ * than generated: random values would differ between the server and client
+ * render and trip hydration. Durations are deliberately co-prime-ish (5.4s,
+ * 7.1s, 6.3s…) so the chips never fall into visible lockstep.
+ */
 const floatingChips = [
-  {
-    icon: Users,
-    label: "Present today",
-    value: "14 / 15",
-    className: "left-[4%] top-[18%]",
-    delay: 0,
-  },
-  {
-    icon: Boxes,
-    label: "Picks this month",
-    value: "33,612",
-    className: "right-[6%] top-[34%]",
-    delay: 0.8,
-  },
-  {
-    icon: TrendingUp,
-    label: "Avg picks / hour",
-    value: "10.4",
-    className: "left-[12%] bottom-[16%]",
-    delay: 1.6,
-  },
+  { icon: Users, label: "Present today", value: "14 / 15",
+    pos: { top: "11%", left: "5%" }, drift: -14, duration: 6.4, delay: 0, tilt: -2 },
+  { icon: Boxes, label: "Picks this month", value: "33,612",
+    pos: { top: "27%", right: "8%" }, drift: -10, duration: 7.1, delay: 0.9, tilt: 1.5 },
+  { icon: TrendingUp, label: "Avg picks / hour", value: "10.4",
+    pos: { bottom: "17%", left: "9%" }, drift: -16, duration: 5.8, delay: 1.7, tilt: 2 },
+  { icon: Moon, label: "Night shift", value: "4",
+    pos: { top: "5%", left: "43%" }, drift: -9, duration: 8.2, delay: 0.4, tilt: -1.5 },
+  { icon: Clock, label: "Overtime", value: "128 hrs",
+    pos: { top: "52%", right: "4%" }, drift: -13, duration: 6.9, delay: 2.3, tilt: 2.5 },
+  { icon: Package, label: "Units moved", value: "2,053",
+    pos: { bottom: "9%", left: "36%" }, drift: -11, duration: 5.4, delay: 1.2, tilt: -2.5 },
+  { icon: Zap, label: "Peak hour", value: "21:00",
+    pos: { bottom: "31%", right: "17%" }, drift: -15, duration: 7.6, delay: 2.9, tilt: 1 },
 ];
 
 export default function LoginPage() {
@@ -51,6 +58,11 @@ export default function LoginPage() {
   const reduceMotion = useReducedMotion();
   const [showPassword, setShowPassword] = React.useState(false);
   const [submitting, setSubmitting] = React.useState(false);
+
+  // Login sits outside AppShell, so it wires up sound itself — and ships the
+  // mute control with it rather than leaving the first screen uncontrollable.
+  const { enabled: soundEnabled } = useSoundEnabled();
+  useUiSounds(soundEnabled);
 
   // Template only — there is no auth backend wired up here.
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -77,7 +89,10 @@ export default function LoginPage() {
 
   return (
     <div className="relative flex min-h-dvh flex-col lg:flex-row">
-      <ThemeToggle className="absolute top-5 right-5 z-20" />
+      <span className="absolute top-5 right-5 z-20 flex items-center gap-1.5">
+        <SoundToggle />
+        <ThemeToggle className="size-9" />
+      </span>
 
       {/* Brand panel — decorative, so it drops out entirely on small screens. */}
       <aside className="relative hidden flex-1 overflow-hidden lg:block">
@@ -115,21 +130,22 @@ export default function LoginPage() {
             <motion.div
               key={chip.label}
               aria-hidden
-              className={`liquid-glass absolute hidden items-center gap-3 rounded-2xl px-4 py-3 xl:flex ${chip.className}`}
+              style={{ ...chip.pos, rotate: chip.tilt }}
+              className="liquid-glass pointer-events-none absolute hidden items-center gap-3 rounded-2xl px-4 py-3 xl:flex"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={
                 reduceMotion
                   ? { opacity: 1, scale: 1 }
-                  : { opacity: 1, scale: 1, y: [0, -12, 0] }
+                  : { opacity: 1, scale: 1, y: [0, chip.drift, 0] }
               }
               transition={
                 reduceMotion
                   ? { duration: 0.4 }
                   : {
-                      opacity: { duration: 0.6, delay: 0.4 + chip.delay * 0.2 },
-                      scale: { duration: 0.6, delay: 0.4 + chip.delay * 0.2 },
+                      opacity: { duration: 0.6, delay: 0.3 + chip.delay * 0.15 },
+                      scale: { duration: 0.6, delay: 0.3 + chip.delay * 0.15 },
                       y: {
-                        duration: 6,
+                        duration: chip.duration,
                         repeat: Infinity,
                         ease: "easeInOut",
                         delay: chip.delay,
@@ -137,10 +153,10 @@ export default function LoginPage() {
                     }
               }
             >
-              <span className="bg-primary/12 text-primary grid size-9 place-items-center rounded-xl">
+              <span className="bg-primary/12 text-primary grid size-9 shrink-0 place-items-center rounded-xl">
                 <chip.icon className="size-[18px]" />
               </span>
-              <span className="leading-tight">
+              <span className="leading-tight whitespace-nowrap">
                 <span className="text-muted-foreground block text-xs">
                   {chip.label}
                 </span>

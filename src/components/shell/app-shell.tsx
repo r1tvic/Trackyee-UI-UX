@@ -6,7 +6,9 @@ import { Menu, X, type LucideIcon } from "lucide-react";
 
 import { Sidebar } from "@/components/shell/sidebar";
 import { useSidebarCollapsed } from "@/components/shell/use-sidebar";
+import { SoundToggle } from "@/components/sound-toggle";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useSoundEnabled, useUiSounds } from "@/lib/ui-sound";
 import { cn } from "@/lib/utils";
 
 export function AppShell({
@@ -25,6 +27,9 @@ export function AppShell({
 }) {
   const { collapsed, setCollapsed } = useSidebarCollapsed();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { enabled: soundEnabled } = useSoundEnabled();
+
+  useUiSounds(soundEnabled);
 
   return (
     <div className="flex h-dvh gap-3 overflow-hidden p-3">
@@ -115,7 +120,10 @@ export function AppShell({
             </span>
           )}
 
-          <ThemeToggle className="ml-auto size-9 shrink-0" />
+          <span className="ml-auto flex shrink-0 items-center gap-1.5">
+            <SoundToggle />
+            <ThemeToggle className="size-9" />
+          </span>
         </header>
 
         <main

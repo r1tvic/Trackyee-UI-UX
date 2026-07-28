@@ -39,10 +39,18 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        {/* Runs before first paint so a collapsed sidebar is already narrow
-            when the page appears. Without it the rail renders expanded, then
-            visibly animates shut on every navigation. Must live in <head> — a
-            <script> directly inside <html> is invalid and breaks hydration. */}
+        {/*
+          Runs before first paint so a collapsed sidebar is already narrow when
+          the page appears — otherwise the rail renders expanded and visibly
+          animates shut on every load.
+
+          Must be wrapped in <head>: a <script> as a direct child of <html> is
+          invalid markup and breaks hydration. next/script's beforeInteractive
+          strategy was tried and does exactly that, so it isn't an option here.
+          Reading the value from a cookie instead would avoid the script, but
+          cookies() in the root layout opts every route out of static
+          prerendering — too high a price for this.
+        */}
         <script
           dangerouslySetInnerHTML={{
             __html: `try{if(localStorage.getItem('trackyee:sidebar-collapsed')==='true'){document.documentElement.setAttribute('data-sidebar-collapsed','')}}catch(e){}`,
