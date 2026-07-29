@@ -38,19 +38,19 @@ import { Label } from "@/components/ui/label";
  */
 const floatingChips = [
   { icon: Users, label: "Present today", value: "14 / 15",
-    pos: { top: "10%", left: "5%" }, drift: -14, duration: 6.4, delay: 0, tilt: -2 },
+    pos: { top: "8%", left: "5%" }, drift: -14, duration: 6.4, delay: 0, tilt: -2 },
   { icon: Boxes, label: "Picks this month", value: "33,612",
-    pos: { top: "18%", right: "7%" }, drift: -10, duration: 7.1, delay: 0.9, tilt: 1.5 },
+    pos: { top: "9%", left: "58%" }, drift: -10, duration: 7.1, delay: 0.9, tilt: 1.5 },
   { icon: TrendingUp, label: "Avg picks / hour", value: "10.4",
-    pos: { bottom: "13%", left: "8%" }, drift: -16, duration: 5.8, delay: 1.7, tilt: 2 },
+    pos: { bottom: "10%", left: "6%" }, drift: -16, duration: 5.8, delay: 1.7, tilt: 2 },
   { icon: Moon, label: "Night shift", value: "4",
-    pos: { top: "5%", left: "42%" }, drift: -9, duration: 8.2, delay: 0.4, tilt: -1.5 },
+    pos: { top: "22%", right: "8%" }, drift: -9, duration: 8.2, delay: 0.4, tilt: -1.5 },
   { icon: Clock, label: "Overtime", value: "128 hrs",
-    pos: { top: "23%", right: "17%" }, drift: -13, duration: 6.9, delay: 2.3, tilt: 2.5 },
+    pos: { top: "31%", right: "4%" }, drift: -13, duration: 6.9, delay: 2.3, tilt: 2.5 },
   { icon: Package, label: "Units moved", value: "2,053",
-    pos: { bottom: "8%", left: "38%" }, drift: -11, duration: 5.4, delay: 1.2, tilt: -2.5 },
+    pos: { bottom: "8%", left: "56%" }, drift: -11, duration: 5.4, delay: 1.2, tilt: -2.5 },
   { icon: Zap, label: "Peak hour", value: "21:00",
-    pos: { bottom: "20%", right: "9%" }, drift: -15, duration: 7.6, delay: 2.9, tilt: 1 },
+    pos: { bottom: "22%", right: "13%" }, drift: -15, duration: 7.6, delay: 2.9, tilt: 1 },
 ];
 
 export default function LoginPage() {
@@ -111,16 +111,14 @@ export default function LoginPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            // Centred in the panel rather than pinned to its left edge, so the
-            // scattered chips read as orbiting the headline.
-            className="grid flex-1 place-content-center px-4 text-center"
+            className="flex max-w-xl flex-1 flex-col justify-center text-left"
           >
             <h1 className="font-display text-6xl leading-[1.02] font-semibold tracking-tight xl:text-7xl 2xl:text-8xl">
               Every shift,
               <br />
               <span className="italic">accounted for.</span>
             </h1>
-            <p className="text-muted-foreground mx-auto mt-8 max-w-md text-lg leading-relaxed text-balance">
+            <p className="text-muted-foreground mt-8 max-w-md text-lg leading-relaxed">
               Attendance, picking rates and payroll across your warehouses —
               just ask for it.
             </p>
@@ -174,7 +172,7 @@ export default function LoginPage() {
       </aside>
 
       {/* Form panel */}
-      <main className="flex flex-1 items-center justify-center p-6 sm:p-10 lg:max-w-[35rem]">
+      <main className="flex flex-1 items-center justify-center p-6 sm:p-10 lg:max-w-[35rem] lg:pl-8 lg:pr-16 xl:pr-20">
         <motion.div
           variants={container}
           initial="hidden"
