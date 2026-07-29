@@ -36,21 +36,24 @@ import { Label } from "@/components/ui/label";
  * render and trip hydration. Durations are deliberately co-prime-ish (5.4s,
  * 7.1s, 6.3s…) so the chips never fall into visible lockstep.
  */
+// Laid out as a 3 / 1 / 3 ring — three chips clear above the headline band,
+// one on the mid-right where the band doesn't reach, three below — each with
+// a small hand-jitter so the ring reads as scattered, not gridded.
 const floatingChips = [
   { icon: Users, label: "Present today", value: "14 / 15",
-    pos: { top: "8%", left: "5%" }, drift: -14, duration: 6.4, delay: 0, tilt: -2 },
-  { icon: Boxes, label: "Picks this month", value: "33,612",
-    pos: { top: "9%", left: "58%" }, drift: -10, duration: 7.1, delay: 0.9, tilt: 1.5 },
-  { icon: TrendingUp, label: "Avg picks / hour", value: "10.4",
-    pos: { bottom: "10%", left: "6%" }, drift: -16, duration: 5.8, delay: 1.7, tilt: 2 },
+    pos: { top: "9%", left: "6%" }, drift: -14, duration: 6.4, delay: 0, tilt: -2 },
   { icon: Moon, label: "Night shift", value: "4",
-    pos: { top: "22%", right: "8%" }, drift: -9, duration: 8.2, delay: 0.4, tilt: -1.5 },
+    pos: { top: "13%", left: "38%" }, drift: -9, duration: 8.2, delay: 0.4, tilt: -1.5 },
+  { icon: Boxes, label: "Picks this month", value: "33,612",
+    pos: { top: "7%", right: "7%" }, drift: -10, duration: 7.1, delay: 0.9, tilt: 1.5 },
   { icon: Clock, label: "Overtime", value: "128 hrs",
-    pos: { top: "31%", right: "4%" }, drift: -13, duration: 6.9, delay: 2.3, tilt: 2.5 },
+    pos: { top: "48%", right: "2%" }, drift: -13, duration: 6.9, delay: 2.3, tilt: 2.5 },
+  { icon: TrendingUp, label: "Avg picks / hour", value: "10.4",
+    pos: { bottom: "10%", left: "7%" }, drift: -16, duration: 5.8, delay: 1.7, tilt: 2 },
   { icon: Package, label: "Units moved", value: "2,053",
-    pos: { bottom: "8%", left: "56%" }, drift: -11, duration: 5.4, delay: 1.2, tilt: -2.5 },
+    pos: { bottom: "16%", left: "39%" }, drift: -11, duration: 5.4, delay: 1.2, tilt: -2.5 },
   { icon: Zap, label: "Peak hour", value: "21:00",
-    pos: { bottom: "22%", right: "13%" }, drift: -15, duration: 7.6, delay: 2.9, tilt: 1 },
+    pos: { bottom: "8%", right: "9%" }, drift: -15, duration: 7.6, delay: 2.9, tilt: 1 },
 ];
 
 export default function LoginPage() {
