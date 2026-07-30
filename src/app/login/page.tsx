@@ -36,26 +36,31 @@ import { Label } from "@/components/ui/label";
  * render and trip hydration. Durations are deliberately co-prime-ish (5.4s,
  * 7.1s, 6.3s…) so the chips never fall into visible lockstep.
  */
-// Four chips across the top band, three across the bottom, all held well
-// inside the panel so none of them reads as pinned to a corner. The headline
-// runs nearly the full panel width at this size, so the middle is left clear
-// rather than fighting it for the right-hand gutter. Staggered tops and a
-// small per-chip tilt keep the two bands from looking like table rows.
+/**
+ * Positions come from CSS custom properties rather than literal values so the
+ * panel can carry two layouts: a compact one that keeps four chips clear of
+ * each other and of the headline all the way down to 1280x800, and a spread
+ * one for very wide panels where there is finally room to scatter them. See
+ * `.login-chips` in globals.css. Everything else here is hand-picked rather
+ * than generated — random values would differ between the server and client
+ * render and trip hydration. Durations are deliberately co-prime-ish (5.4s,
+ * 7.1s, 6.3s…) so the chips never fall into visible lockstep.
+ */
 const floatingChips = [
   { icon: Users, label: "Present today", value: "14 / 15",
-    pos: { top: "11%", left: "11%" }, drift: -14, duration: 6.4, delay: 0, tilt: -2 },
-  { icon: Clock, label: "Overtime", value: "128 hrs",
-    pos: { top: "10%", right: "9%" }, drift: -13, duration: 6.9, delay: 2.3, tilt: 2.5 },
+    pos: { top: "var(--c1-y)", left: "var(--c1-x)" }, drift: -14, duration: 6.4, delay: 0, tilt: -2 },
   { icon: Moon, label: "Night shift", value: "4",
-    pos: { top: "22%", left: "29%" }, drift: -9, duration: 8.2, delay: 0.4, tilt: -1.5 },
+    pos: { top: "var(--c2-y)", left: "var(--c2-x)" }, drift: -9, duration: 8.2, delay: 0.4, tilt: -1.5 },
   { icon: Boxes, label: "Picks this month", value: "33,612",
-    pos: { top: "20%", left: "52%" }, drift: -10, duration: 7.1, delay: 0.9, tilt: 1.5 },
+    pos: { top: "var(--c3-y)", left: "var(--c3-x)" }, drift: -10, duration: 7.1, delay: 0.9, tilt: 1.5 },
+  { icon: Clock, label: "Overtime", value: "128 hrs",
+    pos: { top: "var(--c4-y)", right: "var(--c4-x)" }, drift: -13, duration: 6.9, delay: 2.3, tilt: 2.5 },
   { icon: TrendingUp, label: "Avg picks / hour", value: "10.4",
-    pos: { bottom: "12%", left: "13%" }, drift: -16, duration: 5.8, delay: 1.7, tilt: 2 },
+    pos: { bottom: "var(--c5-y)", left: "var(--c5-x)" }, drift: -16, duration: 5.8, delay: 1.7, tilt: 2 },
   { icon: Package, label: "Units moved", value: "2,053",
-    pos: { bottom: "14%", left: "40%" }, drift: -11, duration: 5.4, delay: 1.2, tilt: -2.5 },
+    pos: { bottom: "var(--c6-y)", left: "var(--c6-x)" }, drift: -11, duration: 5.4, delay: 1.2, tilt: -2.5 },
   { icon: Zap, label: "Peak hour", value: "21:00",
-    pos: { bottom: "11%", right: "11%" }, drift: -15, duration: 7.6, delay: 2.9, tilt: 1 },
+    pos: { bottom: "var(--c7-y)", right: "var(--c7-x)" }, drift: -15, duration: 7.6, delay: 2.9, tilt: 1 },
 ];
 
 export default function LoginPage() {
@@ -101,15 +106,15 @@ export default function LoginPage() {
 
       {/* Brand panel — decorative, so it drops out entirely on small screens. */}
       <aside className="relative hidden flex-1 overflow-hidden lg:block">
-        <div className="relative flex h-full flex-col p-12 xl:p-16 2xl:p-20">
+        <div className="login-chips relative flex h-full flex-col p-12 xl:p-16 2xl:p-20">
           {/* Back to the screen index — "/" redirects here, so it would just
               reload the page. */}
           <Link
             href="/screens"
             className="flex w-fit items-center gap-2.5 rounded-lg focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
           >
-            <TrackyeeMark />
-            <Wordmark />
+            <TrackyeeMark className="size-11" />
+            <Wordmark className="text-[1.9rem]" />
           </Link>
 
           <motion.div
@@ -126,7 +131,7 @@ export default function LoginPage() {
                 between two breakpoints. The vh term is the second half of it —
                 on a short, wide screen the width alone would size a headline
                 that swallows the band the chips sit in. */}
-            <h1 className="font-display text-[clamp(3rem,min(calc(11vw-62px),calc(21vh-72px)),9rem)] leading-[1.02] font-semibold tracking-tight">
+            <h1 className="font-display text-[clamp(3rem,min(calc(10.5vw-62px),calc(21vh-72px)),9rem)] leading-[1.02] font-semibold tracking-tight">
               Every shift,
               <br />
               <span className="italic">accounted for.</span>
@@ -185,12 +190,16 @@ export default function LoginPage() {
       </aside>
 
       {/* Form panel */}
-      <main className="flex flex-1 items-center justify-center p-6 sm:p-10 lg:max-w-[35rem] lg:pl-8 lg:pr-16 xl:max-w-[41rem] xl:pr-24">
+      {/* The extra right padding at 3xl is what walks the card in off the
+          edge; the matching max-width bump keeps it from being squeezed
+          narrower in the process. Below that the panel needs the width for
+          the headline more than the card needs the inset. */}
+      <main className="flex flex-1 items-center justify-center p-6 sm:p-10 lg:max-w-[35rem] lg:pl-8 lg:pr-16 xl:max-w-[41rem] xl:pr-24 3xl:max-w-[46rem] 3xl:pr-48">
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="liquid-glass-strong w-full max-w-md rounded-3xl p-8 sm:p-10"
+          className="liquid-glass-strong w-full max-w-lg rounded-3xl p-8 sm:p-12"
         >
           <motion.div variants={item} className="lg:hidden">
             <Link href="/screens" className="mb-8 flex w-fit items-center gap-2.5">

@@ -5,6 +5,11 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Above this the login panel has width to spare, so the sign-in card can
+     be walked in off the right edge without squeezing the headline. Named
+     rather than an inline min-[1800px] variant so it sorts after xl and 2xl
+     and actually wins the cascade. */
+  --breakpoint-3xl: 112.5rem;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -320,6 +325,41 @@
    panels, and the noise breaks up those steps. It sits at z-index -1,
    behind all content, so it never veils text.
    --------------------------------------------------------------- */
+
+/* Login hero chip positions, as two layouts.
+   c1 Present today · c2 Night shift · c3 Picks this month · c4 Overtime
+   c5 Avg picks/hour · c6 Units moved · c7 Peak hour
+   -x is left for c1/c2/c3/c5/c6 and right for c4/c7; -y is top for c1-c4 and
+   bottom for c5-c7.
+
+   The compact set is sized so four chips stay clear of each other and of the
+   headline on a 1280x800 panel, where the four of them together are nearly as
+   wide as the panel itself and only the vertical stagger keeps them apart.
+   Past 2400px the panel is wide enough that they can spread out and sit lower,
+   closer to the headline, without any of that mattering. */
+.login-chips {
+  --c1-y: 11%;   --c1-x: 11%;
+  --c2-y: 22%;   --c2-x: 29%;
+  --c3-y: 22%;   --c3-x: 52%;
+  --c4-y: 9%;    --c4-x: 9%;
+  --c5-y: 12%;   --c5-x: 13%;
+  --c6-y: 12.5%; --c6-x: 40%;
+  --c7-y: 11%;   --c7-x: 11%;
+}
+
+/* Gated on height as well as width: the spread sits chips lower and closer in,
+   which only clears the headline when the panel is tall too. */
+@media (width >= 2560px) and (height >= 1440px) {
+  .login-chips {
+    --c1-y: 27.5%; --c1-x: 16%;
+    --c2-y: 22.3%; --c2-x: 30.4%;
+    --c3-y: 19.7%; --c3-x: 54.6%;
+    --c4-y: 30.5%; --c4-x: 19.2%;
+    --c5-y: 12.3%; --c5-x: 13.7%;
+    --c6-y: 14%;   --c6-x: 41.9%;
+    --c7-y: 27.2%; --c7-x: 28.8%;
+  }
+}
 
 /* Every size here is kept deliberately close to the viewport. A composited
    layer larger than the GPU's max texture size (commonly 4096px) gets clipped
