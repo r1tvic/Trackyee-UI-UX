@@ -349,7 +349,7 @@
       radial-gradient(at 12% 88%, var(--mesh-4) 0px, transparent 50%);
     /* No will-change: a transform animation is promoted for its duration
        anyway, and the hint would pin an oversized texture permanently. */
-    animation: mesh-drift 15s ease-in-out infinite alternate;
+    animation: mesh-drift 7.5s ease-in-out infinite alternate;
   }
 
   /* Grain layer. Load-bearing rather than decorative: a wide, soft gradient
